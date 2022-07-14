@@ -58,6 +58,17 @@ function Provider({ children }) {
     setGetSearch(value);
   };
 
+  const handleClickSearch = () => {
+    switch (getSearch) {
+    case 'ingredient':
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${recipeTypeInput}`);
+      break;
+
+    default:
+      break;
+    }
+  };
+
   return (
     <MyContext.Provider
       value={ {
@@ -70,6 +81,7 @@ function Provider({ children }) {
         getSearch,
         recipeTypeInput,
         setRecipeTypeInput,
+        handleClickSearch,
       } }
     >
       {children}

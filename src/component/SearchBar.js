@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import MyContext from '../context/myContext';
 
 export default function SearchBar() {
-  const { handleSearch, recipeTypeInput, setRecipeTypeInput } = useContext(MyContext);
+  const { handleSearch,
+    recipeTypeInput, setRecipeTypeInput, handleClickSearch } = useContext(MyContext);
   return (
     <div>
       <input
@@ -45,7 +46,13 @@ export default function SearchBar() {
           onChange={ handleSearch }
         />
       </label>
-      <button type="button" data-testid="exec-search-btn">Search</button>
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+        onClick={ handleClickSearch }
+      >
+        Search
+      </button>
     </div>
   );
 }
