@@ -9,6 +9,7 @@ function Provider({ children }) {
   const [login, setLogin] = useState(LOGIN_INPUTS);
   const [isDisabled, setIsDisabled] = useState(true);
   const [getSearch, setGetSearch] = useState('');
+  const [recipeTypeInput, setRecipeTypeInput] = useState('');
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -67,6 +68,8 @@ function Provider({ children }) {
         handleSubmit,
         handleSearch,
         getSearch,
+        recipeTypeInput,
+        setRecipeTypeInput,
       } }
     >
       {children}

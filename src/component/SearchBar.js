@@ -2,9 +2,16 @@ import React, { useContext } from 'react';
 import MyContext from '../context/myContext';
 
 export default function SearchBar() {
-  const { handleSearch } = useContext(MyContext);
+  const { handleSearch, recipeTypeInput, setRecipeTypeInput } = useContext(MyContext);
   return (
     <div>
+      <input
+        type="text"
+        placeholder="Search Recipe"
+        data-testid="search-input"
+        value={ recipeTypeInput }
+        onChange={ (e) => setRecipeTypeInput(e.target.value) }
+      />
       <label htmlFor="ingredients-radio">
         Ingredient
         <input
