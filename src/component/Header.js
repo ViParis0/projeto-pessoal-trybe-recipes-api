@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 function Header({ pageName, shouldSearch }) {
+  const [toggleBar, setToggleBar] = useState(false);
+  function handleClick() {
+    setToggleBar(!toggleBar);
+  }
   return (
     <>
       <Link to="/profile">
@@ -20,11 +24,17 @@ function Header({ pageName, shouldSearch }) {
       >
         { pageName }
       </h1>
-      {shouldSearch && <img
-        src={ searchIcon }
-        alt="ícone de pesquisa"
-        data-testid="search-top-btn"
-      />}
+      {shouldSearch
+        && (
+          <button type="button" onClick={ handleClick }>
+            <img
+              src={ searchIcon }
+              alt="ícone de pesquisa"
+              data-testid="search-top-btn"
+            />
+          </button>
+        )}
+      {toggleBar && <SearchBar />}
     </>
   );
 }

@@ -2,8 +2,13 @@ import React, { useContext } from 'react';
 import MyContext from '../context/myContext';
 
 export default function SearchBar() {
-  const { handleSearch,
-    recipeTypeInput, setRecipeTypeInput, handleClickSearch } = useContext(MyContext);
+  const {
+    handleSearch,
+    recipeTypeInput,
+    setRecipeTypeInput,
+    handleClickSearch,
+  } = useContext(MyContext);
+
   return (
     <div>
       <input

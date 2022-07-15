@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../component/Header';
-import SearchBar from '../component/SearchBar';
+import MyContext from '../context/myContext';
 
 export default function Foods() {
+  const {
+    setGetPage,
+  } = useContext(MyContext);
+  useEffect(() => setGetPage('foods'), []);
   return (
     <div>
       <Header pageName="Foods" />
-      <SearchBar />
     </div>
   );
 }
