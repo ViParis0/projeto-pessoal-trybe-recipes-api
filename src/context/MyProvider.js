@@ -10,6 +10,8 @@ function Provider({ children }) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [getSearch, setGetSearch] = useState('');
   const [recipeTypeInput, setRecipeTypeInput] = useState('');
+  const [getMeals, setGetMeals] = useState([]);
+  const [getPage, setGetPage] = useState('');
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -53,9 +55,56 @@ function Provider({ children }) {
     history.push('/foods');
   };
 
-  const handleSearch = ({ target }) => {
+  const handleSearch = async ({ target }) => {
     const { value } = target;
+    if (value === 'firstLetter') {
+      global.alert('Your search must have only 1 (one) character');
+    }
     setGetSearch(value);
+  };
+
+  const handleClickSearch = () => {
+    if (getPage === 'foods') {
+      switch (getSearch) {
+      case 'ingredient':
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${recipeTypeInput}`)
+          .then((response) => response.json())
+          .then((data) => setGetMeals(data.meals));
+        break;
+      case 'name':
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeTypeInput}`)
+          .then((response) => response.json())
+          .then((data) => setGetMeals(data.meals));
+        break;
+      case 'firstLetter':
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f={${recipeTypeInput}`)
+          .then((response) => response.json())
+          .then((data) => setGetMeals(data.meals));
+        break;
+      default:
+        break;
+      }
+    } else {
+      switch (getSearch) {
+      case 'ingredient':
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${recipeTypeInput}`)
+          .then((response) => response.json())
+          .then((data) => setGetMeals(data.drinks));
+        break;
+      case 'name':
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${recipeTypeInput}`)
+          .then((response) => response.json())
+          .then((data) => setGetMeals(data.drinks));
+        break;
+      case 'firstLetter':
+        fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?f=${recipeTypeInput}`)
+          .then((response) => response.json())
+          .then((data) => setGetMeals(data.drinks));
+        break;
+      default:
+        break;
+      }
+    }
   };
 
   return (
@@ -70,6 +119,9 @@ function Provider({ children }) {
         getSearch,
         recipeTypeInput,
         setRecipeTypeInput,
+        handleClickSearch,
+        getMeals,
+        setGetPage,
       } }
     >
       {children}
