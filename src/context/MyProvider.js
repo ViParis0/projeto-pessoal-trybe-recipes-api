@@ -11,6 +11,7 @@ function Provider({ children }) {
   const [getSearch, setGetSearch] = useState('');
   const [recipeTypeInput, setRecipeTypeInput] = useState('');
   const [getMeals, setGetMeals] = useState([]);
+  const [getDrinks, setGetDrinks] = useState([]);
   const [getPage, setGetPage] = useState('');
   const history = useHistory();
 
@@ -89,17 +90,17 @@ function Provider({ children }) {
       case 'ingredient':
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${recipeTypeInput}`)
           .then((response) => response.json())
-          .then((data) => setGetMeals(data.drinks));
+          .then((data) => setGetDrinks(data.drinks));
         break;
       case 'name':
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${recipeTypeInput}`)
           .then((response) => response.json())
-          .then((data) => setGetMeals(data.drinks));
+          .then((data) => setGetDrinks(data.drinks));
         break;
       case 'firstLetter':
         fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${recipeTypeInput}`)
           .then((response) => response.json())
-          .then((data) => setGetMeals(data.drinks));
+          .then((data) => setGetDrinks(data.drinks));
         break;
       default:
         break;
@@ -121,7 +122,9 @@ function Provider({ children }) {
         setRecipeTypeInput,
         handleClickSearch,
         getMeals,
+        getDrinks,
         setGetPage,
+        setGetDrinks,
       } }
     >
       {children}
