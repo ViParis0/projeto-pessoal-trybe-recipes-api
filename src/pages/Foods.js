@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-=======
-import React, { useContext, useEffect } from 'react';
+import Card from '../component/Card';
 import Footer from '../component/Footer';
->>>>>>> 02517a95a4cc2b79a281190c83112671af4ff012
 import Header from '../component/Header';
 import MyContext from '../context/myContext';
 
@@ -31,10 +28,13 @@ export default function Foods() {
   return (
     <div>
       <Header pageName="Foods" />
-      {showMeals && limitedMeals.map((drink) => (
-        <div key={ drink.idMeal }>
-          <p>{drink.strMeal}</p>
-        </div>
+      {showMeals && limitedMeals.map((meal, index) => (
+        <Card
+          key={ meal.idMeal }
+          index={ index }
+          strMealThumb={ meal.strMealThumb }
+          strMeal={ meal.strMeal }
+        />
       ))}
       <Footer />
     </div>

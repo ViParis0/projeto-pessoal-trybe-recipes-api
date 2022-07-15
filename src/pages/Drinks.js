@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import Header from '../component/Header';
 import Footer from '../component/Footer';
 import MyContext from '../context/myContext';
+import Card from '../component/Card';
 
 export default function Drinks() {
   const history = useHistory();
@@ -27,7 +28,15 @@ export default function Drinks() {
   return (
     <>
       <Header pageName="Drinks" />
-      {showDrinks && limitedDrinks.map((drink) => <Card)}
+      {showDrinks && limitedDrinks.map((drink, index) => (
+        <Card
+          key={ drink.idDrink }
+          index={ index }
+          strDrinkThumb={ drink.strDrinkThumb }
+          strDrink={ drink.strDrink }
+          type="drink"
+        />
+      ))}
       <h1>Drinks</h1>
       <Footer />
     </>
