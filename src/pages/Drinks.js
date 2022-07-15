@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../component/Header';
+import Footer from '../component/Footer';
 import MyContext from '../context/myContext';
 
 export default function Drinks() {
@@ -11,6 +12,7 @@ export default function Drinks() {
     <>
       <Header pageName="Drinks" />
       <h1>Drinks</h1>
+      <Footer />
     </>
   );
 }
