@@ -16,7 +16,9 @@ export default function Foods() {
   useEffect(() => setGetPage('foods'), []);
 
   useEffect(() => {
-    if (getMeals.length === 1) {
+    if (!getMeals) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (getMeals.length === 1) {
       history.push(`/foods/${getMeals[0].idMeal}`);
     } else {
       const LIMIT_OF_ARR = 12;
@@ -25,6 +27,7 @@ export default function Foods() {
       setShowMeals(true);
     }
   }, [getMeals]);
+
   return (
     <div>
       <Header pageName="Foods" />

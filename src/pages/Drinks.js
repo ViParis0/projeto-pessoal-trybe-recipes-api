@@ -16,7 +16,9 @@ export default function Drinks() {
   useEffect(() => setGetPage('drinks'), []);
 
   useEffect(() => {
-    if (getDrinks.length === 1) {
+    if (!getDrinks) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    } else if (getDrinks.length === 1) {
       history.push(`/drinks/${getDrinks[0].idDrink}`);
     } else {
       const LIMIT_OF_ARR = 12;
