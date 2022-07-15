@@ -77,7 +77,7 @@ function Provider({ children }) {
           .then((data) => setGetMeals(data.meals));
         break;
       case 'firstLetter':
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f={${recipeTypeInput}`)
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=${recipeTypeInput}`)
           .then((response) => response.json())
           .then((data) => setGetMeals(data.meals));
         break;
@@ -97,7 +97,7 @@ function Provider({ children }) {
           .then((data) => setGetMeals(data.drinks));
         break;
       case 'firstLetter':
-        fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?f=${recipeTypeInput}`)
+        fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${recipeTypeInput}`)
           .then((response) => response.json())
           .then((data) => setGetMeals(data.drinks));
         break;
