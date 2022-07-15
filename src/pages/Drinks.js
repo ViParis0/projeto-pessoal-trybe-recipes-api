@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../component/Header';
+import Footer from '../component/Footer';
 import MyContext from '../context/myContext';
 
 export default function Drinks() {
@@ -26,11 +27,9 @@ export default function Drinks() {
   return (
     <>
       <Header pageName="Drinks" />
-      {showDrinks && limitedDrinks.map((drink) => (
-        <div key={ drink.idDrink }>
-          <p>{drink.strDrink}</p>
-        </div>
-      ))}
+      {showDrinks && limitedDrinks.map((drink) => <Card)}
+      <h1>Drinks</h1>
+      <Footer />
     </>
   );
 }
