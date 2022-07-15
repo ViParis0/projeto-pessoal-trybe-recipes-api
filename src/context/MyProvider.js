@@ -10,6 +10,7 @@ function Provider({ children }) {
   const [isDisabled, setIsDisabled] = useState(true);
   const [getSearch, setGetSearch] = useState('');
   const [recipeTypeInput, setRecipeTypeInput] = useState('');
+  const [getMeals, setGetMeals] = useState([]);
   const history = useHistory();
 
   const handleChange = ({ target }) => {
@@ -61,9 +62,20 @@ function Provider({ children }) {
   const handleClickSearch = () => {
     switch (getSearch) {
     case 'ingredient':
-      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${recipeTypeInput}`);
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${recipeTypeInput}`)
+        .then((response) => response.json())
+        .then((data) => setGetMeals(data.meals));
       break;
-
+    case 'name':
+      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeTypeInput}`)
+        .then((response) => response.json())
+        .then((data) => setGetMeals(data.meals));
+      break;
+    case 'firstLetter':
+      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f={${recipeTypeInput}`)
+        .then((response) => response.json())
+        .then((data) => setGetMeals(data.meals));
+      break;
     default:
       break;
     }
@@ -82,6 +94,7 @@ function Provider({ children }) {
         recipeTypeInput,
         setRecipeTypeInput,
         handleClickSearch,
+        getMeals,
       } }
     >
       {children}
