@@ -125,6 +125,7 @@ function Provider({ children }) {
         getDrinks,
         setGetPage,
         setGetDrinks,
+        setGetMeals,
       } }
     >
       {children}
