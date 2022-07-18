@@ -37,7 +37,7 @@ const checkFirstTwelveRecipes = (recipes, meal = true) => {
 };
 
 
-describe('19 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em cada card', () => {
+describe.only('19 - Carregue as 12 primeiras receitas de comidas ou bebidas, uma em cada card', () => {
   it('Caso as receitas sejam de comida, deve-se carregar as 12 primeiras receitas', () => {
     cy.visit('http://localhost:3000/foods', {
       onBeforeLoad(win) {

@@ -12,8 +12,15 @@ export default function Drinks() {
   const {
     setGetPage,
     getDrinks,
+    setGetDrinks,
   } = useContext(MyContext);
   useEffect(() => setGetPage('drinks'), []);
+
+  useEffect(() => {
+    fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
+      .then((response) => response.json())
+      .then((data) => setGetDrinks(data.drinks));
+  }, []);
 
   useEffect(() => {
     if (!getDrinks) {
