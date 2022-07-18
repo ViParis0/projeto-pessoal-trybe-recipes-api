@@ -9,6 +9,8 @@ export default function SearchBar() {
     handleClickSearch,
   } = useContext(MyContext);
 
+  //  fixx erro de lint
+
   return (
     <div>
       <input
