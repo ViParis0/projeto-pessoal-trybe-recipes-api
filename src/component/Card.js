@@ -12,7 +12,7 @@ function Card({ type, strDrinkThumb, strDrink, index, strMealThumb, strMeal }) {
             {strDrink}
           </p>
           <img
-            width="20px"
+            width="15px"
             src={ strDrinkThumb }
             alt={ strDrink }
             data-testid={ `${index}-card-img` }
@@ -26,7 +26,7 @@ function Card({ type, strDrinkThumb, strDrink, index, strMealThumb, strMeal }) {
             {strMeal}
           </p>
           <img
-            width="20px"
+            width="15px"
             src={ strMealThumb }
             alt={ strMeal }
             data-testid={ `${index}-card-img` }
