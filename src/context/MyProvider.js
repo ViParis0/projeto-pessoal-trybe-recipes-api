@@ -14,6 +14,7 @@ function Provider({ children }) {
   const [getDrinks, setGetDrinks] = useState([]);
   const [getPage, setGetPage] = useState('');
   const history = useHistory();
+  const [filterCategories, setFilterCategories] = useState([]);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -58,13 +59,13 @@ function Provider({ children }) {
 
   const handleSearch = async ({ target }) => {
     const { value } = target;
-    if (value === 'firstLetter') {
-      global.alert('Your search must have only 1 (one) character');
-    }
     setGetSearch(value);
   };
 
-  const handleClickSearch = () => {
+  const handleClickSearch = async () => {
+    if (recipeTypeInput.length > 1 && getSearch === 'firstLetter') {
+      return global.alert('Your search must have only 1 (one) character');
+    }
     if (getPage === 'foods') {
       switch (getSearch) {
       case 'ingredient':
@@ -126,6 +127,8 @@ function Provider({ children }) {
         setGetPage,
         setGetDrinks,
         setGetMeals,
+        setFilterCategories,
+        filterCategories,
       } }
     >
       {children}
