@@ -5,6 +5,7 @@ import Footer from '../component/Footer';
 import MyContext from '../context/myContext';
 // import Card from '../component/Card';
 import Recipes from '../component/Recipes';
+import RecipeDetails from '../component/RecipeDetails';
 
 const LIMIT_OF_ARR = 12;
 const LIMIT_OF_CATE = 5;
@@ -72,6 +73,7 @@ export default function Drinks() {
         />
       ))} */}
       <Footer />
+      <RecipeDetails />
     </div>
   );
 }
