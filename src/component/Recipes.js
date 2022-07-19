@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import Card from './Card';
 
@@ -25,3 +26,10 @@ export default function Recipes({ limitedRecipes, type }) {
     )
   );
 }
+
+Recipes.propTypes = {
+  limitedRecipes: PropTypes.shape({
+    map: PropTypes.func,
+  }),
+  type: PropTypes.string,
+}.isRequired;

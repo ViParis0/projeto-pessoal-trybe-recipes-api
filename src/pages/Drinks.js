@@ -47,7 +47,7 @@ export default function Drinks() {
     }
   }, [getDrinks]);
   return (
-    <div className="card-conteiner">
+    <div className="conteiner">
       <Header pageName="Drinks" />
       {filterCategories.map((cate, i) => (
         <button
@@ -58,10 +58,12 @@ export default function Drinks() {
           {cate.strCategory}
         </button>
       ))}
-      {showDrinks && <Recipes
-        limitedRecipes={ limitedDrinks }
-        type="drinks"
-      />}
+      <div className="card-conteiner">
+        {showDrinks && <Recipes
+          limitedRecipes={ limitedDrinks }
+          type="drinks"
+        />}
+      </div>
       {/* {showDrinks && limitedDrinks.map((drink, index) => (
         <Card
           key={ drink.idDrink }

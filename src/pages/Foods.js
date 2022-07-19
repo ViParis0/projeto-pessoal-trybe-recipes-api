@@ -19,6 +19,7 @@ export default function Foods() {
     getMeals,
     setGetMeals,
     setFilterCategories,
+    filterCategories,
     // filterCategories,
   } = useContext(MyContext);
   useEffect(() => setGetPage('foods'), []);
@@ -48,11 +49,22 @@ export default function Foods() {
   }, [getMeals]);
 
   return (
-    <div className="card-conteiner">
+    <div className="conteiner">
       <Header pageName="Foods" />
-      {showMeals && <Recipes
-        limitedRecipes={ limitedMeals }
-      />}
+      {filterCategories.map((cate, i) => (
+        <button
+          key={ i }
+          data-testid={ `${cate.strCategory}-category-filter` }
+          type="button"
+        >
+          {cate.strCategory}
+        </button>
+      ))}
+      <div className="card-conteiner">
+        {showMeals && <Recipes
+          limitedRecipes={ limitedMeals }
+        />}
+      </div>
       {/* {showMeals && limitedMeals.map((meal, index) => (
         <Card
           key={ meal.idMeal }
