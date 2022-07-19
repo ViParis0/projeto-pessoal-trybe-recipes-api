@@ -15,8 +15,18 @@
   position: fixed;
 }
 
-.card-conteiner {
+.conteiner {
+  display: flex;
+  flex-flow: row wrap;
   height: 80vh;
+}
+
+.card-conteiner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+  width: 100%;
 }
 
 .rocksGlass {
