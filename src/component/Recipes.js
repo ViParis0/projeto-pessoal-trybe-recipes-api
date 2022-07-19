@@ -8,6 +8,7 @@ export default function Recipes({ limitedRecipes, type }) {
       limitedRecipes.map((drink, index) => (
         <Card
           key={ drink.idDrink }
+          id={ drink.idDrink }
           index={ index }
           strDrinkThumb={ drink.strDrinkThumb }
           strDrink={ drink.strDrink }
@@ -18,6 +19,7 @@ export default function Recipes({ limitedRecipes, type }) {
       limitedRecipes.map((meal, index) => (
         <Card
           key={ meal.idMeal }
+          id={ meal.idMeal }
           index={ index }
           strMealThumb={ meal.strMealThumb }
           strMeal={ meal.strMeal }

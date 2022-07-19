@@ -13,6 +13,7 @@ export default function Foods() {
   const history = useHistory();
   const [showMeals, setShowMeals] = useState(false);
   const [limitedMeals, setLimitedMeals] = useState([]);
+  const [showAll, setShowAll] = useState(false);
 
   const {
     setGetPage,
@@ -48,14 +49,42 @@ export default function Foods() {
     }
   }, [getMeals]);
 
+  const handleCLick = (category) => {
+    if (showAll) {
+      setShowAll(false);
+      setLimitedMeals(getMeals.slice(0, LIMIT_OF_ARR));
+    } else {
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`)
+        .then((response) => response.json())
+        .then((data) => setLimitedMeals(data.meals.slice(0, LIMIT_OF_ARR)));
+      setShowAll(true);
+    }
+  };
+
+  const handleAll = () => {
+    if (showAll) {
+      setShowAll(false);
+      setLimitedMeals(getMeals.slice(0, LIMIT_OF_ARR));
+    }
+    setShowAll(true);
+  };
+
   return (
     <div className="conteiner">
       <Header pageName="Foods" />
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ handleAll }
+      >
+        All
+      </button>
       {filterCategories.map((cate, i) => (
         <button
           key={ i }
           data-testid={ `${cate.strCategory}-category-filter` }
           type="button"
+          onClick={ () => handleCLick(cate.strCategory) }
         >
           {cate.strCategory}
         </button>

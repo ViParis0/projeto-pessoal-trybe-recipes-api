@@ -13,6 +13,8 @@ export default function Drinks() {
   const history = useHistory();
   const [showDrinks, setShowDrinks] = useState(false);
   const [limitedDrinks, setLimitedDrinks] = useState([]);
+  const [showAll, setShowAll] = useState(false);
+
   // const [isFiltered, setIsFiltered] = useState(false);
   const {
     setGetPage,
@@ -46,14 +48,44 @@ export default function Drinks() {
       setShowDrinks(true);
     }
   }, [getDrinks]);
+
+  const handleCLick = (category) => {
+    if (showAll) {
+      setShowAll(false);
+      setLimitedDrinks(getDrinks.slice(0, LIMIT_OF_ARR));
+    } else {
+      fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`)
+        .then((response) => response.json())
+        .then((data) => setLimitedDrinks(data.drinks.slice(0, LIMIT_OF_ARR)));
+      setShowAll(true);
+    }
+  };
+
+  const handleAll = () => {
+    console.log(pathname);
+    if (showAll) {
+      setShowAll(false);
+      setLimitedDrinks(getDrinks.slice(0, LIMIT_OF_ARR));
+    }
+    setShowAll(true);
+  };
+
   return (
     <div className="conteiner">
       <Header pageName="Drinks" />
+      <button
+        data-testid="All-category-filter"
+        type="button"
+        onClick={ handleAll }
+      >
+        All
+      </button>
       {filterCategories.map((cate, i) => (
         <button
           key={ i }
           data-testid={ `${cate.strCategory}-category-filter` }
           type="button"
+          onClick={ () => handleCLick(cate.strCategory) }
         >
           {cate.strCategory}
         </button>
