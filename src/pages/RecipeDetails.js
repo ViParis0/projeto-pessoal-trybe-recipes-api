@@ -18,10 +18,7 @@ function RecipeDetails({ location: { pathname } }) {
     if (pathname === `/drinks/${ID}`) {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${ID}`)
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setDetailsItem(data.drinks[0]);
-        });
+        .then((data) => setDetailsItem(data.drinks[0]));
       fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
         .then((response) => response.json())
         .then((data) => setRecommended(data.meals.map((meal) => meal.strMeal)));
@@ -29,10 +26,7 @@ function RecipeDetails({ location: { pathname } }) {
     if (pathname === `/foods/${ID}`) {
       fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${ID}`)
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          setDetailsItem(data.meals[0]);
-        });
+        .then((data) => setDetailsItem(data.meals[0]));
       fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((response) => response.json())
         .then((data) => setRecommended(data.drinks.map((drink) => drink.strDrink)));
@@ -58,7 +52,6 @@ function RecipeDetails({ location: { pathname } }) {
       }));
     setFilterIngredients(FILTER_INGREDIENTS);
     setFilterMeasure(FILTER_MEASURE);
-    console.log(FILTER_INGREDIENTS);
   }, [detailsItem]);
 
   return (
