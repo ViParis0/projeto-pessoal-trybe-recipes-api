@@ -5,12 +5,12 @@ import Footer from '../component/Footer';
 import MyContext from '../context/myContext';
 // import Card from '../component/Card';
 import Recipes from '../component/Recipes';
-import RecipeDetails from '../component/RecipeDetails';
+import RecipeDetails from './RecipeDetails';
 
 const LIMIT_OF_ARR = 12;
 const LIMIT_OF_CATE = 5;
 
-export default function Drinks() {
+export default function Drinks(props) {
   const history = useHistory();
   const [showDrinks, setShowDrinks] = useState(false);
   const [limitedDrinks, setLimitedDrinks] = useState([]);
@@ -63,7 +63,7 @@ export default function Drinks() {
   };
 
   const handleAll = () => {
-    console.log(pathname);
+    console.log(props);
     if (showAll) {
       setShowAll(false);
       setLimitedDrinks(getDrinks.slice(0, LIMIT_OF_ARR));
