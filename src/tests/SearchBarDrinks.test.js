@@ -1,19 +1,13 @@
 import React from "react";
 import App from "../App";
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import renderWithRouter from './renderWithRouter';
 import userEvent from '@testing-library/user-event';
-import soupMeals from "../../cypress/mocks/soupMeals";
 
 describe( 'Teste do Header', () => {
-    beforeEach(() => {
-        jest.spyOn(global, 'fetch').mockResolvedValue({
-            json: jest.fn().mockResolvedValue(soupMeals)
-        })
-    }) 
     test('Verifica se contém os radios de pesquisa', () => {
         const { history } = renderWithRouter(<App />);
-        history.push("/foods");
+        history.push("/drinks");
         const iconSearch = screen.getByRole('img', {  name: /ícone de pesquisa/i})
         expect(iconSearch).toBeInTheDocument();
         userEvent.click(iconSearch);
@@ -26,33 +20,36 @@ describe( 'Teste do Header', () => {
     })
     test('verifica o input de pesquisa', () => {
         const { history } = renderWithRouter(<App />);
-        history.push("/foods");
+        history.push("/drinks");
         const iconSearch = screen.getByRole('img', {  name: /ícone de pesquisa/i})
         expect(iconSearch).toBeInTheDocument();
         userEvent.click(iconSearch);
         const inputSearch = screen.getByTestId("search-input");
         expect(inputSearch).toBeInTheDocument();
     })
-    test('verifica o filtro da pesquisa com nome', async() => {
+    test('verifica o filtro da pesquisa com nome na página de drinks', async() => {
         const { history } = renderWithRouter(<App />);
-        history.push("/foods");
+        history.push("/drinks");
         const iconSearch = screen.getByRole('img', {  name: /ícone de pesquisa/i})
         expect(iconSearch).toBeInTheDocument();
         userEvent.click(iconSearch);
         const namecard = screen.getByTestId('name-search-radio');
         userEvent.click(namecard);
         const inputSearch = screen.getByTestId("search-input");
-        userEvent.type(inputSearch, 'soup')
+        userEvent.type(inputSearch, 'egg')
         const btn = screen.getByTestId('exec-search-btn');
         userEvent.click(btn);
-        const recipe = await screen.findByTestId('3-recipe-card')
-        const notIn = screen.queryByTestId('13-recipe-card')
+        await waitFor( () => {
+            screen.getByTestId('0-recipe-card')
+        })
+        const recipe = screen.getByTestId('0-recipe-card')
+        const notIn = screen.queryByTestId('5-recipe-card')
         expect(recipe).toBeInTheDocument();
         expect(notIn).not.toBeInTheDocument();
     })
-    test('verifica o filtro da pesquisa com ingrediente', async() => {
+    test('verifica o filtro da pesquisa com ingrediente na página de drinks', async() => {
         const { history } = renderWithRouter(<App />);
-        history.push("/foods");
+        history.push("/drinks");
         const iconSearch = screen.getByRole('img', {  name: /ícone de pesquisa/i})
         expect(iconSearch).toBeInTheDocument();
         userEvent.click(iconSearch);
@@ -62,14 +59,17 @@ describe( 'Teste do Header', () => {
         userEvent.type(inputSearch, 'salt')
         const btn = screen.getByTestId('exec-search-btn');
         userEvent.click(btn);
-        const recipe = await screen.findByTestId('1-recipe-card')
-        const notIn = screen.queryByTestId('12-recipe-card')
+        await waitFor( () => {
+            screen.getByTestId('0-recipe-card')
+        })
+        const recipe = screen.getByTestId('0-recipe-card')
+        const notIn = screen.queryByTestId('9-recipe-card')
         expect(recipe).toBeInTheDocument();
         expect(notIn).not.toBeInTheDocument();
     })
-    test('verifica o filtro da pesquisa com a primeira letra', async() => {
+    test('verifica o filtro da pesquisa com a primeira letra na página de drinks', async() => {
         const { history } = renderWithRouter(<App />);
-        history.push("/foods");
+        history.push("/drinks");
         const iconSearch = screen.getByRole('img', {  name: /ícone de pesquisa/i})
         expect(iconSearch).toBeInTheDocument();
         userEvent.click(iconSearch);
@@ -79,8 +79,11 @@ describe( 'Teste do Header', () => {
         userEvent.type(inputSearch, 's')
         const btn = screen.getByTestId('exec-search-btn');
         userEvent.click(btn);
-        const recipe = await screen.findByTestId('1-recipe-card')
-        const notIn = screen.queryByTestId('12-recipe-card')
+        await waitFor( () => {
+            screen.getByTestId('0-recipe-card')
+        })
+        const recipe = screen.getByTestId('0-recipe-card')
+        const notIn = screen.queryByTestId('14-recipe-card')
         expect(recipe).toBeInTheDocument();
         expect(notIn).not.toBeInTheDocument();
     })
