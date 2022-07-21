@@ -10,7 +10,7 @@ import RecipeDetails from './RecipeDetails';
 const LIMIT_OF_ARR = 12;
 const LIMIT_OF_CATE = 5;
 
-export default function Drinks(props) {
+export default function Drinks() {
   const history = useHistory();
   const [showDrinks, setShowDrinks] = useState(false);
   const [limitedDrinks, setLimitedDrinks] = useState([]);
@@ -64,10 +64,6 @@ export default function Drinks(props) {
   };
 
   const handleAll = () => {
-<<<<<<< HEAD
-=======
-    console.log(props);
->>>>>>> main-group-23
     if (showAll) {
       setShowAll(false);
       setLimitedDrinks(getDrinks.slice(0, LIMIT_OF_ARR));
