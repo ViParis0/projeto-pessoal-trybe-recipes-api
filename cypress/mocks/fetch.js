@@ -27,6 +27,12 @@ const japaneseMeals = require('../mocks/japaneseMeals');
 const italianMeals = require('../mocks/italianMeals');
 const oneDrinkId15997 = require('./oneDrinkId15997');
 
+// beforeEach(
+//   () => jest.spyOn(global, 'fetch').mockResolvedValue({
+//     json: jest.fn().mockResolvedValue(fetch(url))
+//   })
+// )
+
 const fetch = (url) => Promise.resolve({
   status: 200,
   ok: true,

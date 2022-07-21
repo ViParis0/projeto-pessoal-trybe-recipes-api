@@ -10,7 +10,7 @@ import RecipeDetails from './RecipeDetails';
 const LIMIT_OF_ARR = 12;
 const LIMIT_OF_CATE = 5;
 
-export default function Drinks(props) {
+export default function Drinks() {
   const history = useHistory();
   const [showDrinks, setShowDrinks] = useState(false);
   const [limitedDrinks, setLimitedDrinks] = useState([]);
@@ -24,6 +24,7 @@ export default function Drinks(props) {
     setFilterCategories,
     filterCategories,
   } = useContext(MyContext);
+
   useEffect(() => setGetPage('drinks'), []);
 
   useEffect(() => {
@@ -63,7 +64,6 @@ export default function Drinks(props) {
   };
 
   const handleAll = () => {
-    console.log(props);
     if (showAll) {
       setShowAll(false);
       setLimitedDrinks(getDrinks.slice(0, LIMIT_OF_ARR));
