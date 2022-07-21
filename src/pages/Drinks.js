@@ -24,6 +24,7 @@ export default function Drinks() {
     setFilterCategories,
     filterCategories,
   } = useContext(MyContext);
+
   useEffect(() => setGetPage('drinks'), []);
 
   useEffect(() => {
@@ -63,7 +64,6 @@ export default function Drinks() {
   };
 
   const handleAll = () => {
-    console.log(pathname);
     if (showAll) {
       setShowAll(false);
       setLimitedDrinks(getDrinks.slice(0, LIMIT_OF_ARR));

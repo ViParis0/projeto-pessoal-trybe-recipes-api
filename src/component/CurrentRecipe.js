@@ -4,10 +4,20 @@ import { useRouteMatch } from 'react-router-dom';
 
 const copy = require('clipboard-copy');
 
+const INITIAL_STATE = {
+  cocktails: {
+    id: [],
+  },
+  meals: {
+    id: [],
+  },
+};
+
 export default function CurrentRecipe({ strThumb,
-  strTile, strCategory, ingredients, strInstructions, recipeType, measureUnits,
+  strTile, strCategory, ingredients, strInstructions, recipeType, measureUnits, id,
 }) {
   const [state, setState] = useState([]);
+  const [localState, setLocalState] = useState(INITIAL_STATE);
   const [measure, setMeasureUnits] = useState([]);
   const [copySuccess, setCopySuccess] = useState('');
   const history = useRouteMatch();
@@ -25,23 +35,42 @@ export default function CurrentRecipe({ strThumb,
   };
 
   useEffect(() => {
-    const progressRecipe = state.filter((value) => value.done);
-    const newProgressRecipe = JSON.stringify(progressRecipe);
-    localStorage.setItem(recipeType, newProgressRecipe);
+    if (recipeType === 'foods') {
+      const newStorage = {
+        ...localState,
+        meals: {
+          ...meals,
+          [id]: state.filter((value) => value.done),
+        },
+
+      };
+      setLocalState(newStorage);
+    }
+    if (recipeType === 'drinks') {
+      const newStorage = {
+        ...localState,
+        cocktails: {
+          [id]: state.filter((value) => value.done),
+        },
+
+      };
+      setLocalState(newStorage);
+    }
   }, [state]);
+
+  useEffect(() => {
+    const result = localStorage.getItem('inProgressRecipes');
+    if (!result) {
+      const newObj = {
+        ...localState,
+      };
+      const newProgressRecipe = JSON.stringify(newObj);
+      localStorage.setItem('inProgressRecipes', newProgressRecipe);
+    }
+  }, [localStorage]);
 
   useEffect(() => setState(ingredients), []);
   useEffect(() => setMeasureUnits(measureUnits), []);
-
-  // function handleCopy() {
-  //   // https://blog.dadops.co/2021/03/17/copy-and-paste-in-a-react-app/
-  //   const el = document.createElement('input');
-  //   el.value = window.location.href;
-  //   document.body.appendChild(el);
-  //   el.select();
-  //   document.execCommand('copy');
-  //   document.body.removeChild(el);
-  // }
 
   const handleShare = () => {
     const TWO_SECONDS = 2000;
@@ -51,40 +80,55 @@ export default function CurrentRecipe({ strThumb,
   };
 
   return (
-    <div>
-      <img data-testid="recipe-photo" src={ strThumb } alt={ strTile } width="125px" />
-      <span data-testid="recipe-title">{strTile}</span>
-      <span data-testid="recipe-category">{strCategory}</span>
-      {copySuccess}
-      <button type="button" data-testid="share-btn" onClick={ handleShare }>share</button>
-      <button type="button" data-testid="favorite-btn">fav</button>
-      <span>Igredients</span>
-      {state.map((ingredient, index) => (
-        <label
-          key={ ingredient.name }
-          className={ ingredient.done ? 'line' : '' }
-          htmlFor={ ingredient.name }
-        >
-          {ingredient.name}
-          <input
-            type="checkbox"
-            data-testid={ `${index}-ingredient-step` }
-            onChange={ () => handleChange(ingredient) }
+    state.length
+      && (
+        <div>
+          <img
+            data-testid="recipe-photo"
+            src={ strThumb }
+            alt={ strTile }
+            width="125px"
           />
-        </label>
-      ))}
-      {measure.map((unit, index) => (
-        <p
-          key={ unit.key }
-          data-testid={ `${index}-ingredient-name-and-measure` }
-        >
-          {unit.name}
-        </p>
-      ))}
-      Instructions
-      <p data-testid="instructions">{strInstructions}</p>
-      <button type="button" data-testid="finish-recipe-btn">Finish recipe</button>
-    </div>
+          <span data-testid="recipe-title">{strTile}</span>
+          <span data-testid="recipe-category">{strCategory}</span>
+          {copySuccess}
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ handleShare }
+          >
+            share
+          </button>
+          <button type="button" data-testid="favorite-btn">fav</button>
+          <span>Igredients</span>
+          {state.length && state.map((ingredient, index) => (
+            <label
+              key={ ingredient.name }
+              className={ ingredient.done ? 'line' : '' }
+              htmlFor={ ingredient.name }
+              data-testid={ `${index}-ingredient-step` }
+            >
+              {ingredient.name}
+              <input
+                type="checkbox"
+                id={ ingredient.name }
+                onChange={ () => handleChange(ingredient) }
+              />
+            </label>
+          ))}
+          {measure.map((unit, index) => (
+            <p
+              key={ unit.key }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {unit.name}
+            </p>
+          ))}
+          Instructions
+          <p data-testid="instructions">{strInstructions}</p>
+          <button type="button" data-testid="finish-recipe-btn">Finish recipe</button>
+        </div>
+      )
   );
 }
 
