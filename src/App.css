@@ -15,6 +15,20 @@
   position: fixed;
 }
 
+.conteiner {
+  display: flex;
+  flex-flow: row wrap;
+  height: 80vh;
+}
+
+.card-conteiner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+  width: 100%;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;
