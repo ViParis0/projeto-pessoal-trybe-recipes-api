@@ -1,4 +1,5 @@
 import React from 'react';
+// import ReactDOM from 'react-dom';
 import './App.css';
 // import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,7 +10,7 @@ import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
-import RecipeDetails from './pages/RecipeDetails';
+import Provider from './context/MyProvider';
 
 // { /* <span className="logo">TRYBE</span>
 // <object
@@ -22,18 +23,20 @@ import RecipeDetails from './pages/RecipeDetails';
 
 function App() {
   return (
-    <div className="meals">
-      <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route exact path="/foods" component={ Foods } />
-        <Route exact path="/drinks" component={ Drinks } />
-        <Route path="/foods/:id" component={ RecipeDetails } />
-        <Route path="/drinks/:id" component={ RecipeDetails } />
-        <Route path="/profile" component={ Profile } />
-        <Route path="/done-recipes" component={ DoneRecipes } />
-        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-      </Switch>
-    </div>
+    <Provider>
+      <div className="meals">
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route exact path="/foods" component={ Foods } />
+          <Route exact path="/drinks" component={ Drinks } />
+          <Route path="/foods/:id" />
+          <Route path="/drinks/:id" />
+          <Route path="/profile" component={ Profile } />
+          <Route path="/done-recipes" component={ DoneRecipes } />
+          <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+        </Switch>
+      </div>
+    </Provider>
   );
 }
 
