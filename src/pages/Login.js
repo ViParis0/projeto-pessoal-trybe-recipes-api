@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 
 import MyContext from '../context/myContext';
 
-function Login() {
+export default function Login() {
   const { login: { email, senha },
     handleChange, isDisabled, handleDisabled, handleSubmit } = useContext(MyContext);
   useEffect(handleDisabled, [email, senha]);
@@ -40,5 +40,3 @@ function Login() {
     </form>
   );
 }
-
-export default Login;

@@ -3,7 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import detailContext from '../context/detailContex';
 
-function RecipeDetails({ location: { pathname } }) {
+export default function RecipeDetails({ location: { pathname } }) {
   const { id } = useParams();
   const { handleFetch } = useContext(detailContext);
   useEffect(() => {
@@ -38,5 +38,3 @@ RecipeDetails.defaultProps = {
     pathname: '',
   },
 };
-
-export default RecipeDetails;

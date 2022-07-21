@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import MyContext from './detailContex';
 
-function Provider({ children }) {
+export default function Provider({ children }) {
   const [food, setFood] = useState([]);
   const [drink, setDrink] = useState([]);
 
@@ -32,5 +32,3 @@ function Provider({ children }) {
 Provider.propTypes = {
   children: PropTypes.any,
 }.isRequired;
-
-export default Provider;

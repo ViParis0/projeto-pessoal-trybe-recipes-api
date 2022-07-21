@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function Card({ type, strDrinkThumb, strDrink, index, strMealThumb, strMeal, id }) {
+export default function
+Card({ type, strDrinkThumb, strDrink, index, strMealThumb, strMeal, id }) {
   return (
     type === 'drink'
       ? (
@@ -67,5 +68,3 @@ Card.defaultProps = {
   strMealThumb: '',
   strMeal: '',
 };
-
-export default Card;
