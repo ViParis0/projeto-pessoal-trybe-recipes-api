@@ -39,6 +39,7 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         meals: {
+          ...localState.meals,
           [id]: state.filter((value) => value.done),
         },
 
@@ -49,6 +50,7 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         cocktails: {
+          ...localState.cocktails,
           [id]: state.filter((value) => value.done),
         },
 
