@@ -6,7 +6,11 @@ function Card({ type, strDrinkThumb, strDrink, index, strMealThumb, strMeal, id 
   return (
     type === 'drink'
       ? (
-        <Link to={ `drinks/${id}` }>
+        <Link
+          to={ {
+            pathname: `drinks/${id}`,
+          } }
+        >
           <div
             data-testid={ `${index}-recipe-card` }
           >
@@ -22,7 +26,11 @@ function Card({ type, strDrinkThumb, strDrink, index, strMealThumb, strMeal, id 
           </div>
         </Link>)
       : (
-        <Link to={ `foods/${id}` }>
+        <Link
+          to={ {
+            pathname: `foods/${id}`,
+          } }
+        >
           <div
             data-testid={ `${index}-recipe-card` }
           >
