@@ -5,7 +5,7 @@ import MyContext from './myContext';
 
 const LOGIN_INPUTS = { email: '', senha: '' };
 
-function Provider({ children }) {
+export default function Provider({ children }) {
   const [login, setLogin] = useState(LOGIN_INPUTS);
   const [isDisabled, setIsDisabled] = useState(true);
   const [getSearch, setGetSearch] = useState('');
@@ -139,5 +139,3 @@ function Provider({ children }) {
 Provider.propTypes = {
   children: PropTypes.node.isRequired,
 };
-
-export default Provider;

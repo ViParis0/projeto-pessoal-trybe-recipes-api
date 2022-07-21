@@ -5,7 +5,7 @@ import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import SearchBar from './SearchBar';
 
-function Header({ pageName, shouldSearch }) {
+export default function Header({ pageName, shouldSearch }) {
   const [toggleBar, setToggleBar] = useState(false);
   function handleClick() {
     setToggleBar(!toggleBar);
@@ -48,5 +48,3 @@ Header.defaultProps = {
   pageName: '',
   shouldSearch: true,
 };
-
-export default Header;
