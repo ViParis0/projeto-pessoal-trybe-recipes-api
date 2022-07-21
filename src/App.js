@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
 import RecipeDetails from './pages/RecipeDetails';
+import InProgress from './pages/InProgress';
 
 // { /* <span className="logo">TRYBE</span>
 // <object
@@ -27,11 +28,13 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route path="/foods/:id" component={ RecipeDetails } />
-        <Route path="/drinks/:id" component={ RecipeDetails } />
+        <Route exact path="/foods/:id" component={ RecipeDetails } />
+        <Route exact path="/drinks/:id" component={ RecipeDetails } />
         <Route path="/profile" component={ Profile } />
         <Route path="/done-recipes" component={ DoneRecipes } />
         <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+        <Route path="/drinks/:id/in-progress" component={ InProgress } />
+        <Route path="/foods/:id/in-progress" component={ InProgress } />
       </Switch>
     </div>
   );
