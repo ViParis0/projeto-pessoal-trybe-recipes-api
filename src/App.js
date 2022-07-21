@@ -1,7 +1,5 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import './App.css';
-// import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Route, Switch } from 'react-router-dom';
 import Login from './pages/Login';
@@ -15,16 +13,7 @@ import RecipeInProgress from './pages/RecipeInProgress';
 import DetailProvider from './context/DetailProvider';
 import Provider from './context/MyProvider';
 
-// { /* <span className="logo">TRYBE</span>
-// <object
-//   className="rocksGlass"
-//   type="image/svg+xml"
-//   data={ rockGlass }
-// >
-//   Glass
-// </object> */ }
-
-function App() {
+export default function App() {
   return (
     <Provider>
       <DetailProvider>
@@ -46,5 +35,3 @@ function App() {
     </Provider>
   );
 }
-
-export default App;
