@@ -9,6 +9,7 @@ import Drinks from './pages/Drinks';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 import FavoriteRecipes from './pages/FavoriteRecipes';
+import RecipeInProgress from './pages/RecipeInProgress';
 
 // { /* <span className="logo">TRYBE</span>
 // <object
@@ -26,8 +27,10 @@ function App() {
         <Route exact path="/" component={ Login } />
         <Route exact path="/foods" component={ Foods } />
         <Route exact path="/drinks" component={ Drinks } />
-        <Route path="/foods/:id" />
-        <Route path="/drinks/:id" />
+        <Route exact path="/foods/:id" />
+        <Route exact path="/drinks/:id" />
+        <Route path="/foods/:id/in-progress" component={ RecipeInProgress } />
+        <Route path="/drinks/:id/in-progress" component={ RecipeInProgress } />
         <Route path="/profile" component={ Profile } />
         <Route path="/done-recipes" component={ DoneRecipes } />
         <Route path="/favorite-recipes" component={ FavoriteRecipes } />

@@ -5,8 +5,8 @@ function RecipeDetails({ location: { pathname }, id }) {
   useEffect(() => {
     if (pathname === '/drinks/:id') {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+        .then((response) => response.json());
+      // .then((data) => console.log(data));
     }
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
       .then((response) => response.json())

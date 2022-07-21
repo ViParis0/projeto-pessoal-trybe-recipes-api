@@ -29,6 +29,10 @@
   width: 100%;
 }
 
+.line {
+  text-decoration: line-through;
+}
+
 .rocksGlass {
   animation: shake 1s infinite ease;
   max-height: 80vh;

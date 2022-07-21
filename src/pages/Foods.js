@@ -72,6 +72,7 @@ export default function Foods() {
   return (
     <div className="conteiner">
       <Header pageName="Foods" />
+      {/* <button onClick={ (e) => e.target.className = 'risk' }>teste</button> */}
       <button
         data-testid="All-category-filter"
         type="button"
