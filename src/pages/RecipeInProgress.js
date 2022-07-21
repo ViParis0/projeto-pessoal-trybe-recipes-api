@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import CurrentRecipe from '../component/CurrentRecipe';
 
@@ -75,3 +75,15 @@ export default function RecipeInProgress({ location: { pathname } }) {
     )
   );
 }
+
+RecipeInProgress.propTypes = {
+  location: PropTypes.shape({
+    pathname: PropTypes.string,
+  }),
+};
+
+RecipeInProgress.defaultProps = {
+  location: {
+    pathname: '',
+  },
+};
