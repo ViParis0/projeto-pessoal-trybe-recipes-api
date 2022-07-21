@@ -6,10 +6,8 @@ const copy = require('clipboard-copy');
 
 const INITIAL_STATE = {
   cocktails: {
-    id: [],
   },
   meals: {
-    id: [],
   },
 };
 
@@ -20,6 +18,7 @@ export default function CurrentRecipe({ strThumb,
   const [localState, setLocalState] = useState(INITIAL_STATE);
   const [measure, setMeasureUnits] = useState([]);
   const [copySuccess, setCopySuccess] = useState('');
+  const [isDisabled, setIsDisables] = useState(true);
   const history = useRouteMatch();
 
   const handleChange = (ingredient) => {
@@ -39,18 +38,16 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         meals: {
-          ...localState.meals,
           [id]: state.filter((value) => value.done),
         },
 
       };
       setLocalState(newStorage);
     }
-    if (recipeType === 'drinks') {
+    if (recipeType === 'drink') {
       const newStorage = {
         ...localState,
         cocktails: {
-          ...localState.cocktails,
           [id]: state.filter((value) => value.done),
         },
 
@@ -62,13 +59,26 @@ export default function CurrentRecipe({ strThumb,
   useEffect(() => {
     const result = localStorage.getItem('inProgressRecipes');
     if (!result) {
+      const newObj = { ...localState };
+      const newProgressRecipe = JSON.stringify(newObj);
+      localStorage.setItem('inProgressRecipes', newProgressRecipe);
+    } else {
+      const data = JSON.parse(result);
       const newObj = {
-        ...localState,
+        ...data,
+        meals: {
+          ...data.meals,
+          ...localState.meals,
+        },
+        cocktails: {
+          ...data.cocktails,
+          ...localState.cocktails,
+        },
       };
       const newProgressRecipe = JSON.stringify(newObj);
       localStorage.setItem('inProgressRecipes', newProgressRecipe);
     }
-  }, [localStorage]);
+  }, [localState]);
 
   useEffect(() => setState(ingredients), []);
   useEffect(() => setMeasureUnits(measureUnits), []);
@@ -79,6 +89,10 @@ export default function CurrentRecipe({ strThumb,
     setCopySuccess('Link copied!');
     setTimeout(() => setCopySuccess(''), TWO_SECONDS);
   };
+
+  useEffect(() => {
+    setIsDisables(!state.every((value) => value.done));
+  }, [state]);
 
   return (
     state.length
@@ -127,7 +141,13 @@ export default function CurrentRecipe({ strThumb,
           ))}
           Instructions
           <p data-testid="instructions">{strInstructions}</p>
-          <button type="button" data-testid="finish-recipe-btn">Finish recipe</button>
+          <button
+            type="button"
+            disabled={ isDisabled }
+            data-testid="finish-recipe-btn"
+          >
+            Finish recipe
+          </button>
         </div>
       )
   );

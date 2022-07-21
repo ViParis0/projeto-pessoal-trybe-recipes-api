@@ -69,6 +69,7 @@ export default function RecipeInProgress({ location: { pathname } }) {
             measureUnits={ measureUnits }
             strInstructions={ apiReturn.strInstructions }
             recipeType="drink"
+            id={ id }
           />
         )}
       </div>
