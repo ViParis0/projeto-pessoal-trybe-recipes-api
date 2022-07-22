@@ -3,6 +3,8 @@ import React, { useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import ButtonStartRecipe from '../component/ButtonStartRecipe';
 import detailContext from '../context/detailContex';
+import ShareButton from '../component/ShareButton';
+import FavoriteButton from '../component/FavoriteButton';
 
 // Referência 01: Replace: https://stackoverflow.com/questions/20498831/refused-to-display-in-a-frame-because-it-set-x-frame-options-to-sameorigin
 export default function RecipeDetails({ location: { pathname } }) {
@@ -85,6 +87,8 @@ export default function RecipeDetails({ location: { pathname } }) {
           ))}
         </div>
         <ButtonStartRecipe />
+        <ShareButton />
+        <FavoriteButton />
       </div>
     )
     : (
@@ -158,6 +162,8 @@ export default function RecipeDetails({ location: { pathname } }) {
           ))}
         </div>
         <ButtonStartRecipe />
+        <ShareButton />
+        <FavoriteButton />
       </div>
     )
 )
