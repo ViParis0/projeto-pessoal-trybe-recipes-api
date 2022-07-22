@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
-
-const copy = require('clipboard-copy');
+import { useHistory } from 'react-router-dom';
+import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
 
 const INITIAL_STATE = {
   cocktails: {
@@ -17,9 +17,8 @@ export default function CurrentRecipe({ strThumb,
   const [state, setState] = useState([]);
   const [localState, setLocalState] = useState(INITIAL_STATE);
   const [measure, setMeasureUnits] = useState([]);
-  const [copySuccess, setCopySuccess] = useState('');
   const [isDisabled, setIsDisables] = useState(true);
-  const history = useRouteMatch();
+  const history2 = useHistory();
 
   const handleChange = (ingredient) => {
     const newState = [...state];
@@ -38,7 +37,7 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         meals: {
-          [id]: state.filter((value) => value.done),
+          [id]: state,
         },
 
       };
@@ -48,7 +47,7 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         cocktails: {
-          [id]: state.filter((value) => value.done),
+          [id]: state,
         },
 
       };
@@ -80,19 +79,30 @@ export default function CurrentRecipe({ strThumb,
     }
   }, [localState]);
 
-  useEffect(() => setState(ingredients), []);
-  useEffect(() => setMeasureUnits(measureUnits), []);
-
-  const handleShare = () => {
-    const TWO_SECONDS = 2000;
-    copy(`http://localhost:3000${history.url}`);
-    setCopySuccess('Link copied!');
-    setTimeout(() => setCopySuccess(''), TWO_SECONDS);
-  };
+  // const handleFavorite = () => {
+  //   setIsFav(!fav);
+  // };
 
   useEffect(() => {
     setIsDisables(!state.every((value) => value.done));
   }, [state]);
+
+  const handleClick = () => {
+    history2.push('/done-recipes');
+  };
+
+  useEffect(() => {
+    const checkeds = localStorage.getItem('inProgressRecipes');
+    const result = JSON.parse(checkeds);
+    if (recipeType === 'foods' && result.meals[id]) {
+      setState(result.meals[id]);
+    } else if (recipeType === 'drink' && result.cocktails[id]) {
+      setState(result.cocktails[id]);
+    } else {
+      setState(ingredients);
+      setMeasureUnits(measureUnits);
+    }
+  }, []);
 
   return (
     state.length
@@ -106,15 +116,8 @@ export default function CurrentRecipe({ strThumb,
           />
           <span data-testid="recipe-title">{strTile}</span>
           <span data-testid="recipe-category">{strCategory}</span>
-          {copySuccess}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
-            share
-          </button>
-          <button type="button" data-testid="favorite-btn">fav</button>
+          <ShareButton />
+          <FavoriteButton />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (
             <label
@@ -126,6 +129,7 @@ export default function CurrentRecipe({ strThumb,
               {ingredient.name}
               <input
                 type="checkbox"
+                checked={ ingredient.done }
                 id={ ingredient.name }
                 onChange={ () => handleChange(ingredient) }
               />
@@ -145,6 +149,7 @@ export default function CurrentRecipe({ strThumb,
             type="button"
             disabled={ isDisabled }
             data-testid="finish-recipe-btn"
+            onClick={ handleClick }
           >
             Finish recipe
           </button>
