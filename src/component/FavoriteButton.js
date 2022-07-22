@@ -11,10 +11,10 @@ export default function FavoriteButton() {
   return (
     <button
       type="button"
-      data-testid="favorite-btn"
       onClick={ handleFavorite }
     >
       <img
+        data-testid="favorite-btn"
         src={ isFav ? blackHeartIcon : whitekHeartIcon }
         alt="favorite button"
       />

@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import ShareButton from './ShareButton';
 import FavoriteButton from './FavoriteButton';
-
-const copy = require('clipboard-copy');
 
 const INITIAL_STATE = {
   cocktails: {
@@ -19,9 +17,7 @@ export default function CurrentRecipe({ strThumb,
   const [state, setState] = useState([]);
   const [localState, setLocalState] = useState(INITIAL_STATE);
   const [measure, setMeasureUnits] = useState([]);
-  const [copySuccess, setCopySuccess] = useState('');
   const [isDisabled, setIsDisables] = useState(true);
-  const history = useRouteMatch();
   const history2 = useHistory();
 
   const handleChange = (ingredient) => {
@@ -83,13 +79,6 @@ export default function CurrentRecipe({ strThumb,
     }
   }, [localState]);
 
-  const handleShare = () => {
-    const TWO_SECONDS = 2000;
-    copy(`http://localhost:3000${history.url}`);
-    setCopySuccess('Link copied!');
-    setTimeout(() => setCopySuccess(''), TWO_SECONDS);
-  };
-
   // const handleFavorite = () => {
   //   setIsFav(!fav);
   // };
@@ -127,8 +116,7 @@ export default function CurrentRecipe({ strThumb,
           />
           <span data-testid="recipe-title">{strTile}</span>
           <span data-testid="recipe-category">{strCategory}</span>
-          {copySuccess}
-          <ShareButton testId="share-btn" handleClick={ handleShare } text="" />
+          <ShareButton />
           <FavoriteButton />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (

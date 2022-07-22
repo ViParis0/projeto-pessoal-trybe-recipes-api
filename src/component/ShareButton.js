@@ -1,22 +1,34 @@
 // recebe um data test id e uma função como prop
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { useRouteMatch } from 'react-router-dom';
 import shareIcon from '../images/shareIcon.svg';
 
-export default function Button({ testId, handleClick }) {
+const copy = require('clipboard-copy');
+
+export default function Button() {
+  const [copySuccess, setCopySuccess] = useState('');
+  const history = useRouteMatch();
+
+  const handleShare = () => {
+    const TWO_SECONDS = 2000;
+    copy(`http://localhost:3000${history.url.replace('/in-progress', '')}`);
+    setCopySuccess('Link copied!');
+    setTimeout(() => setCopySuccess(''), TWO_SECONDS);
+  };
+
   return (
-    <button
-      type="button"
-      data-testid={ testId }
-      onClick={ handleClick }
-    >
-      <img src={ shareIcon } alt="share icon" />
-    </button>
+    <div>
+      {copySuccess}
+      <button
+        type="button"
+        onClick={ handleShare }
+      >
+        <img
+          data-testid="share-btn"
+          src={ shareIcon }
+          alt="share icon"
+        />
+      </button>
+    </div>
   );
 }
-
-Button.propTypes = {
-  handleClick: PropTypes.any,
-  testId: PropTypes.any,
-  text: PropTypes.any,
-}.isRequired;
