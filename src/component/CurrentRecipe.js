@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { useRouteMatch } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 const copy = require('clipboard-copy');
 
@@ -20,6 +20,7 @@ export default function CurrentRecipe({ strThumb,
   const [copySuccess, setCopySuccess] = useState('');
   const [isDisabled, setIsDisables] = useState(true);
   const history = useRouteMatch();
+  const history2 = useHistory();
 
   const handleChange = (ingredient) => {
     const newState = [...state];
@@ -38,7 +39,7 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         meals: {
-          [id]: state.filter((value) => value.done),
+          [id]: state,
         },
 
       };
@@ -48,7 +49,7 @@ export default function CurrentRecipe({ strThumb,
       const newStorage = {
         ...localState,
         cocktails: {
-          [id]: state.filter((value) => value.done),
+          [id]: state,
         },
 
       };
@@ -80,9 +81,6 @@ export default function CurrentRecipe({ strThumb,
     }
   }, [localState]);
 
-  useEffect(() => setState(ingredients), []);
-  useEffect(() => setMeasureUnits(measureUnits), []);
-
   const handleShare = () => {
     const TWO_SECONDS = 2000;
     copy(`http://localhost:3000${history.url}`);
@@ -93,6 +91,23 @@ export default function CurrentRecipe({ strThumb,
   useEffect(() => {
     setIsDisables(!state.every((value) => value.done));
   }, [state]);
+
+  const handleClick = () => {
+    history2.push('/done-recipes');
+  };
+
+  useEffect(() => {
+    const checkeds = localStorage.getItem('inProgressRecipes');
+    const result = JSON.parse(checkeds);
+    if (recipeType === 'foods' && result.meals[id]) {
+      setState(result.meals[id]);
+    } else if (recipeType === 'drink' && result.cocktails[id]) {
+      setState(result.cocktails[id]);
+    } else {
+      setState(ingredients);
+      setMeasureUnits(measureUnits);
+    }
+  }, []);
 
   return (
     state.length
@@ -126,6 +141,7 @@ export default function CurrentRecipe({ strThumb,
               {ingredient.name}
               <input
                 type="checkbox"
+                checked={ ingredient.done }
                 id={ ingredient.name }
                 onChange={ () => handleChange(ingredient) }
               />
@@ -145,6 +161,7 @@ export default function CurrentRecipe({ strThumb,
             type="button"
             disabled={ isDisabled }
             data-testid="finish-recipe-btn"
+            onClick={ handleClick }
           >
             Finish recipe
           </button>
