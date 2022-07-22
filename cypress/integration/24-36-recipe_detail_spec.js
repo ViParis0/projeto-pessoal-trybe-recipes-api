@@ -211,7 +211,7 @@ describe('27 - Implemente os 6 cards de recomendação, mostrando apenas 2. O sc
   });
 });
 
-describe('28 - Desenvolva um botão de nome \"Start Recipe\" que deve ficar fixo na parte de baixo da tela o tempo todo', () => {
+describe.only('28 - Desenvolva um botão de nome \"Start Recipe\" que deve ficar fixo na parte de baixo da tela o tempo todo', () => {
   it('Verifica posicionamento do botão na tela de detalhes de comida', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
@@ -237,7 +237,7 @@ describe('28 - Desenvolva um botão de nome \"Start Recipe\" que deve ficar fixo
   });
 });
 
-describe('29 - Implemente a solução de forma que, caso a receita já tenha sido feita, o botão \"Start Recipe\" desapareça', () => {
+describe.only('29 - Implemente a solução de forma que, caso a receita já tenha sido feita, o botão \"Start Recipe\" desapareça', () => {
   it('Verifica se botão de iniciar receita não é visível na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
@@ -289,7 +289,7 @@ describe('29 - Implemente a solução de forma que, caso a receita já tenha sid
   });
 });
 
-describe('30 - Implemente a solução de modo que, caso a receita tenha sido iniciada mas não finalizada, o texto do botão deve ser \"Continue Recipe\"', () => {
+describe.only('30 - Implemente a solução de modo que, caso a receita tenha sido iniciada mas não finalizada, o texto do botão deve ser \"Continue Recipe\"', () => {
   it('Verifica botão de "Continue Recipe" na tela de detalhes de uma comida', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
@@ -323,7 +323,7 @@ describe('30 - Implemente a solução de modo que, caso a receita tenha sido ini
   });
 });
 
-describe('31 - Redirecione a pessoa usuária caso o botão \"Start Recipe\" seja clicado, a rota deve mudar para a tela de receita em progresso', () => {
+describe.only('31 - Redirecione a pessoa usuária caso o botão \"Start Recipe\" seja clicado, a rota deve mudar para a tela de receita em progresso', () => {
   it('Redireciona para tela de receita da comida em progresso', () => {
     cy.visit('http://localhost:3000/foods/52771', {
       onBeforeLoad(win) {
