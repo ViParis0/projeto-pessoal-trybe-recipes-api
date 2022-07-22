@@ -1,6 +1,8 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useRouteMatch } from 'react-router-dom';
+import ShareButton from './ShareButton';
+import FavoriteButton from './FavoriteButton';
 
 const copy = require('clipboard-copy');
 
@@ -88,6 +90,10 @@ export default function CurrentRecipe({ strThumb,
     setTimeout(() => setCopySuccess(''), TWO_SECONDS);
   };
 
+  // const handleFavorite = () => {
+  //   setIsFav(!fav);
+  // };
+
   useEffect(() => {
     setIsDisables(!state.every((value) => value.done));
   }, [state]);
@@ -122,14 +128,8 @@ export default function CurrentRecipe({ strThumb,
           <span data-testid="recipe-title">{strTile}</span>
           <span data-testid="recipe-category">{strCategory}</span>
           {copySuccess}
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ handleShare }
-          >
-            share
-          </button>
-          <button type="button" data-testid="favorite-btn">fav</button>
+          <ShareButton testId="share-btn" handleClick={ handleShare } text="" />
+          <FavoriteButton />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (
             <label
