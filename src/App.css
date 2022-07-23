@@ -39,10 +39,10 @@
 }
 
 .carouselFather {
-  width: 100vw;
   display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
+  width: 100vw;
 }
 
 .carouselChildren {
