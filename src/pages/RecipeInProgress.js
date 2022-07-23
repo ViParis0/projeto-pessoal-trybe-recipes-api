@@ -52,22 +52,28 @@ export default function RecipeInProgress({ location: { pathname } }) {
         {type === 'foods' ? (
           <CurrentRecipe
             strThumb={ apiReturn.strMealThumb }
-            strTile={ apiReturn.strMeal }
+            strTitle={ apiReturn.strMeal }
             strCategory={ apiReturn.strCategory }
             ingredients={ ingredients }
             measureUnits={ measureUnits }
             strInstructions={ apiReturn.strInstructions }
+            strTags={ apiReturn.strTags || [] }
+            strArea={ apiReturn.strArea }
+            strAlcoholic={ apiReturn.strAlcoholic || '' }
             recipeType="foods"
             id={ id }
           />
         ) : (
           <CurrentRecipe
             strThumb={ apiReturn.strDrinkThumb }
-            strTile={ apiReturn.strDrink }
+            strTitle={ apiReturn.strDrink }
             strCategory={ apiReturn.strCategory }
             ingredients={ ingredients }
             measureUnits={ measureUnits }
             strInstructions={ apiReturn.strInstructions }
+            strTags={ apiReturn.strTags || [] }
+            strArea={ apiReturn.strArea || '' }
+            strAlcoholic={ apiReturn.strAlcoholic }
             recipeType="drink"
             id={ id }
           />

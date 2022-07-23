@@ -12,7 +12,8 @@ const INITIAL_STATE = {
 };
 
 export default function CurrentRecipe({ strThumb,
-  strTile, strCategory, ingredients, strInstructions, recipeType, measureUnits, id,
+  strTitle, strCategory, ingredients, strInstructions,
+  recipeType, measureUnits, id, strTags, strArea, strAlcoholic,
 }) {
   const [state, setState] = useState([]);
   const [localState, setLocalState] = useState(INITIAL_STATE);
@@ -79,15 +80,44 @@ export default function CurrentRecipe({ strThumb,
     }
   }, [localState]);
 
-  // const handleFavorite = () => {
-  //   setIsFav(!fav);
-  // };
-
   useEffect(() => {
     setIsDisables(!state.every((value) => value.done));
   }, [state]);
 
+  //   [{
+  //     id: id-da-receita,
+  //     type: comida-ou-bebida,
+  //     nationality: nacionalidade-da-receita-ou-texto-vazio,
+  //     category: categoria-da-receita-ou-texto-vazio,
+  //     alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
+  //     name: nome-da-receita,
+  //     image: imagem-da-receita,
+  //     doneDate: quando-a-receita-foi-concluida,
+  //     tags: array-de-tags-da-receita-ou-array-vazio
+  // }]
+
   const handleClick = () => {
+    const result = localStorage.getItem('doneRecipes');
+    const newObj = {
+      id,
+      type: recipeType === 'foods' ? 'food' : 'drink',
+      nationality: strArea,
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strTitle,
+      image: strThumb,
+      doneDate: new Date(),
+      tags: strTags.length ? strTags.split(',').slice(0, 2) : [],
+    };
+    if (result) {
+      const newArr = JSON.parse(result);
+      const doneRecipe = newArr.filter((recipe) => recipe.id !== newObj.id);
+      const finalArr = [...doneRecipe, newObj];
+      localStorage.setItem('doneRecipes', JSON.stringify(finalArr));
+    } else {
+      const newArr = [newObj];
+      localStorage.setItem('doneRecipes', JSON.stringify(newArr));
+    }
     history2.push('/done-recipes');
   };
 
@@ -111,12 +141,12 @@ export default function CurrentRecipe({ strThumb,
           <img
             data-testid="recipe-photo"
             src={ strThumb }
-            alt={ strTile }
+            alt={ strTitle }
             width="125px"
           />
-          <span data-testid="recipe-title">{strTile}</span>
+          <span data-testid="recipe-title">{strTitle}</span>
           <span data-testid="recipe-category">{strCategory}</span>
-          <ShareButton />
+          <ShareButton testId="share-btn" />
           <FavoriteButton />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (
@@ -162,7 +192,7 @@ CurrentRecipe.propTypes = {
   ingredients: PropTypes.shape({
     map: PropTypes.func,
   }),
-  strCategory: PropTypes.any,
-  strThumb: PropTypes.any,
-  strTile: PropTypes.any,
+  strCategory: PropTypes.string,
+  strThumb: PropTypes.string,
+  strTitle: PropTypes.string,
 }.isRequired;
