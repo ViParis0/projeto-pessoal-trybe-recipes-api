@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import MyContext from './detailContex';
 
+const SIX = 6;
+
 export default function Provider({ children }) {
   const [food, setFood] = useState([]);
   const [drink, setDrink] = useState([]);
@@ -20,7 +22,11 @@ export default function Provider({ children }) {
         });
       fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((response) => response.json())
-        .then((data) => setRecommended(data.drinks.map((drinks) => drinks.strDrink)));
+        .then((data) => {
+          console.log(data.drinks);
+          setRecommended(data.drinks.slice(0, SIX));
+          // setRecommended(data.drinks.map((drinks) => drinks.strDrink));
+        });
     }
     if (type.includes('drinks')) {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
@@ -31,7 +37,11 @@ export default function Provider({ children }) {
         });
       fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
         .then((response) => response.json())
-        .then((data) => setRecommended(data.meals.map((meal) => meal.strMeal)));
+        .then((data) => {
+          console.log(data.meals);
+          setRecommended(data.meals.slice(0, SIX));
+          // setRecommended(data.meals.map((meal) => meal.strMeal));
+        });
     }
   };
 
