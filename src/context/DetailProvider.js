@@ -17,30 +17,28 @@ export default function Provider({ children }) {
       fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data.meals[0]);
           setFood(data.meals[0]);
           setDetailsItem(data.meals[0]);
         });
       fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=')
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.drinks);
           setRecommended(data.drinks.slice(0, SIX));
-          // setRecommended(data.drinks.map((drinks) => drinks.strDrink));
         });
     }
     if (type.includes('drinks')) {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
         .then((response) => response.json())
         .then((data) => {
+          console.log(data.drinks[0]);
           setDrink(data.drinks[0]);
           setDetailsItem(data.drinks[0]);
         });
       fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.meals);
           setRecommended(data.meals.slice(0, SIX));
-          // setRecommended(data.meals.map((meal) => meal.strMeal));
         });
     }
   };

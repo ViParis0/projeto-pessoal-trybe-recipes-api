@@ -13,8 +13,6 @@ export default function RecipeDetails({ location: { pathname } }) {
   const { id } = useParams();
   const ID = pathname.split('/')[2];
 
-  console.log(recommended);
-
   useEffect(() => {
     handleFetch(pathname, id);
   }, []);
@@ -30,7 +28,6 @@ export default function RecipeDetails({ location: { pathname } }) {
         >
           { detailsItem.strDrink }
         </div>
-        <hr />
         <img
           data-testid="recipe-photo"
           src={ detailsItem.strDrinkThumb }
@@ -38,22 +35,19 @@ export default function RecipeDetails({ location: { pathname } }) {
           width="100px"
           height="100px"
         />
-        <hr />
         <div
           data-testid="recipe-category"
         >
           Category:
           { detailsItem.strAlcoholic }
         </div>
-        <hr />
         <div
           data-testid="instructions"
         >
           Instructions:
           { detailsItem.strInstructions }
         </div>
-        <hr />
-        <div>
+        <div className="ingredientsAndMeasures">
           Ingredients and Measures:
           { filterIngredients.map((ingredients, index) => (
             <div
@@ -78,7 +72,6 @@ export default function RecipeDetails({ location: { pathname } }) {
             </div>
           ))}
         </div>
-        <hr />
         <div className="carouselFather">
           Recommended:
           { recommended.map((recom, index) => (
@@ -104,10 +97,17 @@ export default function RecipeDetails({ location: { pathname } }) {
             </div>
           ))}
         </div>
-        <hr />
-        <ButtonStartRecipe />
         <ShareButton testId="share-btn" />
-        <FavoriteButton />
+        <FavoriteButton
+          id={ id }
+          type="drink"
+          nationality=""
+          category={ detailsItem.strCategory }
+          alcoholicOrNot={ detailsItem.strAlcoholic }
+          name={ detailsItem.strDrink }
+          image={ detailsItem.strDrinkThumb }
+        />
+        <ButtonStartRecipe />
       </div>
     )
     : (
@@ -117,7 +117,6 @@ export default function RecipeDetails({ location: { pathname } }) {
         >
           { detailsItem.strMeal }
         </div>
-        <hr />
         <img
           data-testid="recipe-photo"
           src={ detailsItem.strMealThumb }
@@ -125,28 +124,24 @@ export default function RecipeDetails({ location: { pathname } }) {
           width="100px"
           height="100px "
         />
-        <hr />
         <div
           data-testid="recipe-category"
         >
           Category:
           { detailsItem.strCategory }
         </div>
-        <hr />
         <iframe
           title={ detailsItem.strMeal }
           data-testid="video"
           src={ detailsItem.strYoutube.replace('watch?v=', 'embed/') }
         />
-        <hr />
         <div
           data-testid="instructions"
         >
           Instructions:
           { detailsItem.strInstructions }
         </div>
-        <hr />
-        <div>
+        <div className="ingredientsAndMeasures">
           Ingredients:
           { filterIngredients.map((ingredientes, index) => (
             <div
@@ -171,7 +166,6 @@ export default function RecipeDetails({ location: { pathname } }) {
             </div>
           ))}
         </div>
-        <hr />
         <div className="carouselFather">
           Recommended:
           { recommended.map((recome, index) => (
@@ -197,10 +191,17 @@ export default function RecipeDetails({ location: { pathname } }) {
             </div>
           ))}
         </div>
-        <hr />
-        <ButtonStartRecipe />
         <ShareButton testId="share-btn" />
-        <FavoriteButton />
+        <FavoriteButton
+          id={ id }
+          type="food"
+          nationality={ detailsItem.strArea }
+          category={ detailsItem.strCategory }
+          alcoholicOrNot=""
+          name={ detailsItem.strMeal }
+          image={ detailsItem.strMealThumb }
+        />
+        <ButtonStartRecipe />
       </div>
     )
 )

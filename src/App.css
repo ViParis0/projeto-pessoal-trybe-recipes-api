@@ -50,6 +50,10 @@
   scroll-snap-align: start;
 }
 
+.ingredientsAndMeasures {
+  display: flex;
+}
+
 /* * {
   margin: 0;
   padding: 0;
