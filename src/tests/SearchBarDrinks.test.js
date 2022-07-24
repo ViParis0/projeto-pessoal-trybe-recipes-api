@@ -43,9 +43,7 @@ describe( 'Teste do Header', () => {
             screen.getByTestId('0-recipe-card')
         })
         const recipe = screen.getByTestId('0-recipe-card')
-        const notIn = screen.queryByTestId('5-recipe-card')
         expect(recipe).toBeInTheDocument();
-        expect(notIn).not.toBeInTheDocument();
     })
     test('verifica o filtro da pesquisa com ingrediente na página de drinks', async() => {
         const { history } = renderWithRouter(<App />);
@@ -61,7 +59,7 @@ describe( 'Teste do Header', () => {
         userEvent.click(btn);
         await waitFor( () => {
             screen.getByTestId('0-recipe-card')
-        })
+        }, 200);
         const recipe = screen.getByTestId('0-recipe-card')
         const notIn = screen.queryByTestId('9-recipe-card')
         expect(recipe).toBeInTheDocument();
@@ -81,7 +79,7 @@ describe( 'Teste do Header', () => {
         userEvent.click(btn);
         await waitFor( () => {
             screen.getByTestId('0-recipe-card')
-        })
+        }, 200)
         const recipe = screen.getByTestId('0-recipe-card')
         const notIn = screen.queryByTestId('14-recipe-card')
         expect(recipe).toBeInTheDocument();
