@@ -5,7 +5,7 @@ import whitekHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function FavoriteButton({ id, type, nationality, category,
   alcoholicOrNot, name, image, testIdFav, alt, setFavoriteRecipes }) {
-  const [isFav, setIsFav] = useState(true);
+  const [isFav, setIsFav] = useState(null);
   console.log(id);
   useEffect(() => {
     const LOCAL_FAV = localStorage.getItem('favoriteRecipes');
