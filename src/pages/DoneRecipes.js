@@ -8,10 +8,10 @@ export default function DoneRecipes() {
   const { getDoneRecipes } = useContext(detailContext);
   useEffect(() => getDoneRecipes(), []);
   return (
-    <>
+    <div className="conteiner">
       <Header pageName="Done Recipes" shouldSearch={ false } />
       <StaticFilters />
       <DoneAndFavoriteRecipes />
-    </>
+    </div>
   );
 }

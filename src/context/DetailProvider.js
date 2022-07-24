@@ -45,8 +45,11 @@ export default function Provider({ children }) {
   };
 
   const getDoneRecipes = () => {
-    const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
-    setDoneRecipes(newArr);
+    const result = localStorage.getItem('doneRecipes');
+    if (result) {
+      const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
+      setDoneRecipes(newArr);
+    }
   };
 
   useEffect(() => {
