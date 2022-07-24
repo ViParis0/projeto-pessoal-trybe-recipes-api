@@ -31,7 +31,7 @@ describe('16 - Implemente o menu inferior posicionando-o de forma fixa e contend
   });
 });
 
-describe.only('17 - Exiba o menu inferior apenas nas telas indicadas pelo protótipo', () => {
+describe('17 - Exiba o menu inferior apenas nas telas indicadas pelo protótipo', () => {
   const hasNoFooter = () => {
     cy.get('[data-testid="footer"]').should('not.exist');
     cy.get('[data-testid="drinks-bottom-btn"]').should('not.exist');
