@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Provider>
       <DetailProvider>
-        <div className="meals">
+        <div className="meals conteiner">
           <Switch>
             <Route exact path="/" component={ Login } />
             <Route exact path="/foods" component={ Foods } />

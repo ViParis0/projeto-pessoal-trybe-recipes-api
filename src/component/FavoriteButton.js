@@ -4,8 +4,9 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whitekHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function FavoriteButton({ id, type, nationality, category,
-  alcoholicOrNot, name, image }) {
-  const [isFav, setIsFav] = useState(false);
+  alcoholicOrNot, name, image, testIdFav, alt, setFavoriteRecipes }) {
+  const [isFav, setIsFav] = useState(true);
+  console.log(id);
   useEffect(() => {
     const LOCAL_FAV = localStorage.getItem('favoriteRecipes');
     if (LOCAL_FAV) {
@@ -35,6 +36,9 @@ export default function FavoriteButton({ id, type, nationality, category,
       const JSON_FAV = JSON.parse(LOCAL_FAV);
       const newJson = JSON_FAV.filter((favorite) => favorite.id !== id);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newJson));
+      if (setFavoriteRecipes) {
+        setFavoriteRecipes(newJson);
+      }
     }
     setIsFav(!isFav);
   };
@@ -44,15 +48,17 @@ export default function FavoriteButton({ id, type, nationality, category,
       onClick={ handleFavorite }
     >
       <img
-        data-testid="favorite-btn"
+        data-testid={ testIdFav }
         src={ isFav ? blackHeartIcon : whitekHeartIcon }
-        alt="favorite button"
+        alt={ alt }
       />
     </button>
   );
 }
 
 FavoriteButton.propTypes = {
+  testIdFav: PropTypes.string.isRequired,
+  alt: PropTypes.string,
   id: PropTypes.string,
   type: PropTypes.string,
   nationality: PropTypes.string,
@@ -60,6 +66,7 @@ FavoriteButton.propTypes = {
   alcoholicOrNot: PropTypes.string,
   name: PropTypes.string,
   image: PropTypes.string,
+  setFavoriteRecipes: PropTypes.func,
 };
 
 FavoriteButton.defaultProps = {
@@ -70,4 +77,6 @@ FavoriteButton.defaultProps = {
   alcoholicOrNot: '',
   name: '',
   image: '',
+  alt: '',
+  setFavoriteRecipes: () => {},
 };
