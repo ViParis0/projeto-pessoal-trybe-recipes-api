@@ -106,6 +106,8 @@ export default function RecipeDetails({ location: { pathname } }) {
           alcoholicOrNot={ detailsItem.strAlcoholic }
           name={ detailsItem.strDrink }
           image={ detailsItem.strDrinkThumb }
+          testIdFav="favorite-btn"
+          alt={ detailsItem.strMeal }
         />
         <ButtonStartRecipe />
       </div>
@@ -200,6 +202,8 @@ export default function RecipeDetails({ location: { pathname } }) {
           alcoholicOrNot=""
           name={ detailsItem.strMeal }
           image={ detailsItem.strMealThumb }
+          testIdFav="favorite-btn"
+          alt={ detailsItem.strDrink }
         />
         <ButtonStartRecipe />
       </div>

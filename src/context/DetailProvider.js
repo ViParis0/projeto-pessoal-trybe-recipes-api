@@ -12,6 +12,7 @@ export default function Provider({ children }) {
   const [filterIngredients, setFilterIngredients] = useState();
   const [filterMeasure, setFilterMeasure] = useState();
   const [doneRecipes, setDoneRecipes] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   const handleFetch = (type, id) => {
     if (type.includes('foods')) {
@@ -49,6 +50,12 @@ export default function Provider({ children }) {
     setDoneRecipes(newArr);
   };
 
+  const getFavoriteRecipes = () => {
+    const favArr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(favArr);
+    setFavoriteRecipes(favArr);
+  };
+
   useEffect(() => {
     const FILTER_INGREDIENTS = Object.entries(detailsItem)
       .filter(([key, value]) => key
@@ -82,6 +89,9 @@ export default function Provider({ children }) {
         filterMeasure,
         getDoneRecipes,
         doneRecipes,
+        getFavoriteRecipes,
+        favoriteRecipes,
+        setFavoriteRecipes,
       } }
     >
       {children}
