@@ -52,6 +52,16 @@ export default function Provider({ children }) {
     }
   };
 
+  const doneFilter = (type) => {
+    // setDoneRecipes(resultFilter);
+    const result = localStorage.getItem('doneRecipes');
+    if (result) {
+      const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
+      const resultFilter = newArr.filter((recipe) => recipe.type === type);
+      setDoneRecipes(resultFilter);
+    }
+  };
+
   useEffect(() => {
     const FILTER_INGREDIENTS = Object.entries(detailsItem)
       .filter(([key, value]) => key
@@ -85,6 +95,7 @@ export default function Provider({ children }) {
         filterMeasure,
         getDoneRecipes,
         doneRecipes,
+        doneFilter,
       } }
     >
       {children}
