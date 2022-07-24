@@ -46,7 +46,7 @@ export default function RecipeInProgress({ location: { pathname } }) {
   }, []);
 
   return (
-    ingredients.length
+    ingredients.length > 0
     && (
       <div className="conteiner">
         {type === 'foods' ? (
