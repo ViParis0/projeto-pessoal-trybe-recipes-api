@@ -97,15 +97,6 @@ export default function Drinks() {
           type="drinks"
         />}
       </div>
-      {/* {showDrinks && limitedDrinks.map((drink, index) => (
-        <Card
-          key={ drink.idDrink }
-          index={ index }
-          strDrinkThumb={ drink.strDrinkThumb }
-          strDrink={ drink.strDrink }
-          type="drink"
-        />
-      ))} */}
       <Footer />
       <RecipeDetails />
     </div>
