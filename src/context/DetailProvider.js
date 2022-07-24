@@ -46,8 +46,21 @@ export default function Provider({ children }) {
   };
 
   const getDoneRecipes = () => {
-    const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
-    setDoneRecipes(newArr);
+    const result = localStorage.getItem('doneRecipes');
+    if (result) {
+      const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
+      setDoneRecipes(newArr);
+    }
+  };
+
+  const doneFilter = (type) => {
+    // setDoneRecipes(resultFilter);
+    const result = localStorage.getItem('doneRecipes');
+    if (result) {
+      const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
+      const resultFilter = newArr.filter((recipe) => recipe.type === type);
+      setDoneRecipes(resultFilter);
+    }
   };
 
   const getFavoriteRecipes = () => {
@@ -92,6 +105,7 @@ export default function Provider({ children }) {
         getFavoriteRecipes,
         favoriteRecipes,
         setFavoriteRecipes,
+        doneFilter,
       } }
     >
       {children}
