@@ -47,27 +47,38 @@ export default function Provider({ children }) {
 
   const getDoneRecipes = () => {
     const result = localStorage.getItem('doneRecipes');
+    const favoriteRec = localStorage.getItem('favoriteRecipes');
     if (result) {
       const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
       setDoneRecipes(newArr);
+    }
+    if (favoriteRec) {
+      const favArr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      setFavoriteRecipes(favArr);
     }
   };
 
   const doneFilter = (type) => {
     // setDoneRecipes(resultFilter);
     const result = localStorage.getItem('doneRecipes');
+    const favoriteRec = localStorage.getItem('favoriteRecipes');
     if (result) {
       const newArr = JSON.parse(localStorage.getItem('doneRecipes'));
       const resultFilter = newArr.filter((recipe) => recipe.type === type);
       setDoneRecipes(resultFilter);
     }
+    if (favoriteRec) {
+      const favArr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      const favArrFilter = favArr.filter((recipe) => recipe.type === type);
+      setFavoriteRecipes(favArrFilter);
+    }
   };
 
-  const getFavoriteRecipes = () => {
-    const favArr = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    console.log(favArr);
-    setFavoriteRecipes(favArr);
-  };
+  // const getFavoriteRecipes = () => {
+  //   const favArr = JSON.parse(localStorage.getItem('favoriteRecipes'));
+  //   console.log(favArr);
+  //   setFavoriteRecipes(favArr);
+  // };
 
   useEffect(() => {
     const FILTER_INGREDIENTS = Object.entries(detailsItem)
@@ -102,7 +113,7 @@ export default function Provider({ children }) {
         filterMeasure,
         getDoneRecipes,
         doneRecipes,
-        getFavoriteRecipes,
+        // getFavoriteRecipes,
         favoriteRecipes,
         setFavoriteRecipes,
         doneFilter,

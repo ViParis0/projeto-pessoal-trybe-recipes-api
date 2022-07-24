@@ -7,9 +7,9 @@ import ShareButton from '../component/ShareButton';
 import FavoriteButton from '../component/FavoriteButton';
 
 export default function FavoriteRecipes() {
-  const { favoriteRecipes, getFavoriteRecipes,
+  const { favoriteRecipes, getDoneRecipes,
     setFavoriteRecipes } = useContext(detailContext);
-  useEffect(() => getFavoriteRecipes(), []);
+  useEffect(() => getDoneRecipes(), []);
 
   return (
     <>
