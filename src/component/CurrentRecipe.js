@@ -151,12 +151,12 @@ export default function CurrentRecipe({ strThumb,
             testIdFav="favorite-btn"
             id={ id }
             alt={ strTitle }
-            type={ recipeType === 'foods' ? 'food' : 'drink' }
-            nationality={ strArea }
-            category={ strCategory }
-            alcoholicOrNot={ strAlcoholic }
-            name={ strTitle }
-            image={ strThumb }
+            // type={ recipeType === 'foods' ? 'food' : 'drink' }
+            // nationality={ strArea }
+            // category={ strCategory }
+            // alcoholicOrNot={ strAlcoholic }
+            // name={ strTitle }
+            // image={ strThumb }
           />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (
