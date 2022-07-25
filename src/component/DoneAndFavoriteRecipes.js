@@ -3,23 +3,11 @@ import { Link } from 'react-router-dom';
 import ShareButton from './ShareButton';
 import detailContext from '../context/detailContex';
 
-// [{
-//     id: id-da-receita,
-//     type: comida-ou-bebida,
-//     nationality: nacionalidade-da-receita-ou-texto-vazio,
-//     category: categoria-da-receita-ou-texto-vazio,
-//     alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-//     name: nome-da-receita,
-//     image: imagem-da-receita,
-//     doneDate: quando-a-receita-foi-concluida,
-//     tags: array-de-tags-da-receita-ou-array-vazio
-// }]
-
 export default function DoneAndFavoriteRecipes() {
   const { doneRecipes } = useContext(detailContext);
   return (
     <div>
-      {doneRecipes.length && doneRecipes.map((recipe, index) => (
+      {doneRecipes.length > 0 && doneRecipes.map((recipe, index) => (
         <div key={ recipe.id }>
           <span data-testid={ `${index}-horizontal-top-text` }>
             {`${recipe.alcoholicOrNot}${recipe.nationality} - ${recipe.category}`}
