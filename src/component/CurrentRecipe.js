@@ -34,7 +34,7 @@ export default function CurrentRecipe({ strThumb,
   };
 
   useEffect(() => {
-    if (recipeType === 'foods') {
+    if (recipeType === 'food') {
       const newStorage = {
         ...localState,
         meals: {
@@ -100,7 +100,7 @@ export default function CurrentRecipe({ strThumb,
     const result = localStorage.getItem('doneRecipes');
     const newObj = {
       id,
-      type: recipeType === 'foods' ? 'food' : 'drink',
+      type: recipeType,
       nationality: strArea,
       category: strCategory,
       alcoholicOrNot: strAlcoholic,
@@ -124,7 +124,7 @@ export default function CurrentRecipe({ strThumb,
   useEffect(() => {
     const checkeds = localStorage.getItem('inProgressRecipes');
     const result = JSON.parse(checkeds);
-    if (recipeType === 'foods' && result.meals[id]) {
+    if (recipeType === 'food' && result.meals[id]) {
       setState(result.meals[id]);
     } else if (recipeType === 'drink' && result.cocktails[id]) {
       setState(result.cocktails[id]);
@@ -151,12 +151,12 @@ export default function CurrentRecipe({ strThumb,
             testIdFav="favorite-btn"
             id={ id }
             alt={ strTitle }
-            // type={ recipeType === 'foods' ? 'food' : 'drink' }
-            // nationality={ strArea }
-            // category={ strCategory }
-            // alcoholicOrNot={ strAlcoholic }
-            // name={ strTitle }
-            // image={ strThumb }
+            type={ recipeType }
+            nationality={ strArea }
+            category={ strCategory }
+            alcoholicOrNot={ strAlcoholic }
+            name={ strTitle }
+            image={ strThumb }
           />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (
