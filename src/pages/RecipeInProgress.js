@@ -60,7 +60,7 @@ export default function RecipeInProgress({ location: { pathname } }) {
             strTags={ apiReturn.strTags || [] }
             strArea={ apiReturn.strArea }
             strAlcoholic={ apiReturn.strAlcoholic || '' }
-            recipeType="foods"
+            recipeType="food"
             id={ id }
           />
         ) : (
