@@ -147,7 +147,17 @@ export default function CurrentRecipe({ strThumb,
           <span data-testid="recipe-title">{strTitle}</span>
           <span data-testid="recipe-category">{strCategory}</span>
           <ShareButton testId="share-btn" />
-          <FavoriteButton />
+          <FavoriteButton
+            testIdFav="favorite-btn"
+            id={ id }
+            alt={ strTitle }
+            // type={ recipeType === 'foods' ? 'food' : 'drink' }
+            // nationality={ strArea }
+            // category={ strCategory }
+            // alcoholicOrNot={ strAlcoholic }
+            // name={ strTitle }
+            // image={ strThumb }
+          />
           <span>Igredients</span>
           {state.length && state.map((ingredient, index) => (
             <label
