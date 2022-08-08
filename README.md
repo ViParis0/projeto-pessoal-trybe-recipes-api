@@ -4,7 +4,7 @@
 
 Este foi um projeto desenvolvido em grupo, para praticarmos o desenvolvimento de uma aplicação focada em mobile, simulando um frontend completo de um aplicativo de receitas.
 Nesse projeto ultilizamos o React, React-Router, e o Tawilwind para estilização.
-A aplicação foi desenvolvida em conjunto, por mim e o Wilianson, e os teste pelo Matheus, além de aproveitarmos o mock do retorno da API da Trybe.
+A aplicação e a estilização foram desenvolvida em conjunto, por mim e o Wilianson, e os teste pelo Matheus, além de aproveitarmos o mock do retorno da API da Trybe.
 
 ## Como executar o projeto
 
