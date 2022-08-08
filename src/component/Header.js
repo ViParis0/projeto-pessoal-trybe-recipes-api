@@ -1,41 +1,46 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import SearchBar from './SearchBar';
+import myContext from '../context/myContext';
 
 export default function Header({ pageName, shouldSearch }) {
-  const [toggleBar, setToggleBar] = useState(false);
+  const { toggleBar, setToggleBar } = useContext(myContext);
   function handleClick() {
     setToggleBar(!toggleBar);
   }
   return (
-    <>
-      <Link to="/profile">
-        <img
-          src={ profileIcon }
-          alt="icone de perfil"
-          data-testid="profile-top-btn"
-        />
-      </Link>
-      <h1
-        data-testid="page-title"
-      >
-        { pageName }
-      </h1>
+    <div className="flex justify-around bg-green-300 items-baseline">
+      <div>
+        <Link to="/profile">
+          <img
+            src={ profileIcon }
+            alt="icone de perfil"
+            data-testid="profile-top-btn"
+          />
+        </Link>
+      </div>
+      <div>
+        <h1
+          data-testid="page-title"
+        >
+          { pageName }
+        </h1>
+      </div>
       {shouldSearch
         && (
-          <button type="button" onClick={ handleClick }>
-            <img
-              src={ searchIcon }
-              alt="ícone de pesquisa"
-              data-testid="search-top-btn"
-            />
-          </button>
+          <div>
+            <button type="button" onClick={ handleClick }>
+              <img
+                src={ searchIcon }
+                alt="ícone de pesquisa"
+                data-testid="search-top-btn"
+              />
+            </button>
+          </div>
         )}
-      {toggleBar && <SearchBar />}
-    </>
+    </div>
   );
 }
 

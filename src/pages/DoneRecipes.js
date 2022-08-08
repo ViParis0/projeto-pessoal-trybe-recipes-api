@@ -8,7 +8,7 @@ export default function DoneRecipes() {
   const { getDoneRecipes } = useContext(detailContext);
   useEffect(() => getDoneRecipes(), []);
   return (
-    <div className="conteiner">
+    <div className="bg-stone-200 min-h-screen">
       <Header pageName="Done Recipes" shouldSearch={ false } />
       <StaticFilters />
       <DoneAndFavoriteRecipes />

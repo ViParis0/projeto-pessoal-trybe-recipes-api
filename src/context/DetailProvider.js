@@ -19,7 +19,6 @@ export default function Provider({ children }) {
       fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.meals[0]);
           setFood(data.meals[0]);
           setDetailsItem(data.meals[0]);
         });
@@ -33,7 +32,6 @@ export default function Provider({ children }) {
       fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data.drinks[0]);
           setDrink(data.drinks[0]);
           setDetailsItem(data.drinks[0]);
         });

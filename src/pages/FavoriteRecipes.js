@@ -18,21 +18,31 @@ export default function FavoriteRecipes() {
         shouldSearch={ false }
         className="ingredientsAndMeasures"
       />
-      <StaticFilters
-        className="ingredientsAndMeasures"
-      />
-      <div
-        className="ingredientsAndMeasures"
-      >
+      <StaticFilters />
+      <div>
         {
           favoriteRecipes.map((recipeFav, index) => (
             <div
               key={ recipeFav.id }
+              className="flex justify-between
+              bg-white p-1 rounded shadow m-2"
             >
-              <Link
-                to={ `/${recipeFav.type}s/${recipeFav.id}` }
-              >
+              <div className="w-1/2">
+                <Link
+                  to={ `/${recipeFav.type}s/${recipeFav.id}` }
+                >
+                  <img
+                    className="w-52"
+                    src={ recipeFav.image }
+                    alt={ recipeFav.name }
+                    width="150px"
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                </Link>
+              </div>
+              <div className="ml-1 flex flex-col">
                 <span
+                  className="text-gray-400"
                   data-testid={ `${index}-horizontal-top-text` }
                 >
                   {recipeFav.alcoholicOrNot}
@@ -40,27 +50,24 @@ export default function FavoriteRecipes() {
                 </span>
                 <span
                   data-testid={ `${index}-horizontal-name` }
+                  className="text-3xl"
                 >
                   {recipeFav.name}
                 </span>
-                <img
-                  src={ recipeFav.image }
-                  alt={ recipeFav.name }
-                  width="150px"
-                  data-testid={ `${index}-horizontal-image` }
-                />
-              </Link>
-              <ShareButton
-                testId={ `${index}-horizontal-share-btn` }
-                recipeId={ recipeFav.id }
-                type={ recipeFav.type }
-              />
-              <FavoriteButton
-                testIdFav={ `${index}-horizontal-favorite-btn` }
-                alt={ recipeFav.name }
-                id={ recipeFav.id }
-                setFavoriteRecipes={ setFavoriteRecipes }
-              />
+                <div className="flex justify-around">
+                  <ShareButton
+                    testId={ `${index}-horizontal-share-btn` }
+                    recipeId={ recipeFav.id }
+                    type={ recipeFav.type }
+                  />
+                  <FavoriteButton
+                    testIdFav={ `${index}-horizontal-favorite-btn` }
+                    alt={ recipeFav.name }
+                    id={ recipeFav.id }
+                    setFavoriteRecipes={ setFavoriteRecipes }
+                  />
+                </div>
+              </div>
             </div>
           ))
         }

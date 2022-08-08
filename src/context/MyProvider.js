@@ -15,6 +15,7 @@ export default function Provider({ children }) {
   const [getPage, setGetPage] = useState('');
   const history = useHistory();
   const [filterCategories, setFilterCategories] = useState([]);
+  const [toggleBar, setToggleBar] = useState(false);
 
   const handleChange = ({ target }) => {
     const { id, value } = target;
@@ -129,6 +130,8 @@ export default function Provider({ children }) {
         setGetMeals,
         setFilterCategories,
         filterCategories,
+        toggleBar,
+        setToggleBar,
       } }
     >
       {children}

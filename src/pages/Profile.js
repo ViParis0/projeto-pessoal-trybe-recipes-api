@@ -29,8 +29,16 @@ export default function Profile() {
   return (
     <>
       <Header pageName="Profile" shouldSearch={ false } />
-      <div className="ingredientsAndMeasures">
+      <p
+        className="text-4xl text-center"
+        type="text"
+        data-testid="profile-email"
+      >
+        {email}
+      </p>
+      <div className="flex flex-col items-center">
         <button
+          className="bg-stone-300 p-4 rounded-lg mt-10 w-1/2 border-white border-4"
           type="button"
           data-testid="profile-done-btn"
           onClick={ () => history.push('/done-recipes') }
@@ -38,6 +46,7 @@ export default function Profile() {
           Done Recipes
         </button>
         <button
+          className="bg-stone-300 p-4 rounded-lg mt-10 w-1/2 border-white border-4"
           type="button"
           data-testid="profile-favorite-btn"
           onClick={ () => history.push('/favorite-recipes') }
@@ -45,6 +54,7 @@ export default function Profile() {
           Favorite Recipes
         </button>
         <button
+          className="bg-stone-300 p-4 rounded-lg mt-10 w-1/2 border-white border-4"
           type="button"
           data-testid="profile-logout-btn"
           onClick={ handleLogout }
@@ -52,12 +62,6 @@ export default function Profile() {
           Logout
         </button>
       </div>
-      <p
-        type="text"
-        data-testid="profile-email"
-      >
-        { `E-mail: ${email}` }
-      </p>
       <Footer />
     </>
   );

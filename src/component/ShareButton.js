@@ -13,7 +13,6 @@ export default function ShareButton({ testId, recipeId, type }) {
   const handleShare = () => {
     const TWO_SECONDS = 2000;
     if (history.url === '/done-recipes' || history.url === '/favorite-recipes') {
-      console.log('entrou');
       copy(`http://localhost:3000/${type}s/${recipeId}`);
       setCopySuccess('Link copied!');
       setTimeout(() => setCopySuccess(''), TWO_SECONDS);

@@ -40,24 +40,31 @@ export default function ButtonStartRecipe() {
   return (
     <div>
       {isVisabled && (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="fixed"
-          onClick={ handleClick }
-        >
-          Start Recipe
-        </button>
+        <div className="fixed bottom-0 flex justify-center w-full">
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="w-full bg-green-500 hover:bg-green-700
+           text-white font-bold py-2 px-4 rounded"
+            onClick={ handleClick }
+          >
+            Start Recipe
+          </button>
+        </div>
       )}
 
       {isDisabled && (
-        <button
-          type="button"
-          data-testid="start-recipe-btn"
-          className="fixed"
-        >
-          Continue Recipe
-        </button>
+        <div className="fixed bottom-0 flex justify-center w-full">
+          <button
+            type="button"
+            data-testid="start-recipe-btn"
+            className="w-full bg-green-500 hover:bg-green-700
+           text-white font-bold py-2 px-4 rounded"
+           onClick={ handleClick }
+          >
+            Continue Recipe
+          </button>
+        </div>
       )}
     </div>
 

@@ -5,6 +5,7 @@ import Footer from '../component/Footer';
 import Header from '../component/Header';
 import MyContext from '../context/myContext';
 import Recipes from '../component/Recipes';
+import SearchBar from '../component/SearchBar';
 
 const LIMIT_OF_ARR = 12;
 const LIMIT_OF_CATE = 5;
@@ -22,6 +23,7 @@ export default function Foods() {
     setFilterCategories,
     filterCategories,
     // filterCategories,
+    toggleBar,
   } = useContext(MyContext);
   useEffect(() => setGetPage('foods'), []);
 
@@ -70,39 +72,35 @@ export default function Foods() {
   };
 
   return (
-    <div className="conteiner">
+    <div className="bg-stone-200">
       <Header pageName="Foods" />
-      {/* <button onClick={ (e) => e.target.className = 'risk' }>teste</button> */}
-      <button
-        data-testid="All-category-filter"
-        type="button"
-        onClick={ handleAll }
-      >
-        All
-      </button>
-      {filterCategories.map((cate, i) => (
+      {toggleBar && <SearchBar />}
+      <div className="flex flex-wrap justify-around">
         <button
-          key={ i }
-          data-testid={ `${cate.strCategory}-category-filter` }
+          className="bg-stone-300 p-1 w-1/3 border-white border-4"
+          data-testid="All-category-filter"
           type="button"
-          onClick={ () => handleCLick(cate.strCategory) }
+          onClick={ handleAll }
         >
-          {cate.strCategory}
+          All
         </button>
-      ))}
-      <div className="card-conteiner">
+        {filterCategories.map((cate, i) => (
+          <button
+            className="bg-stone-300 p-1 w-1/3 border-white border-4"
+            key={ i }
+            data-testid={ `${cate.strCategory}-category-filter` }
+            type="button"
+            onClick={ () => handleCLick(cate.strCategory) }
+          >
+            {cate.strCategory}
+          </button>
+        ))}
+      </div>
+      <div className="flex flex-wrap justify-around w-full">
         {showMeals && <Recipes
           limitedRecipes={ limitedMeals }
         />}
       </div>
-      {/* {showMeals && limitedMeals.map((meal, index) => (
-        <Card
-          key={ meal.idMeal }
-          index={ index }
-          strMealThumb={ meal.strMealThumb }
-          strMeal={ meal.strMeal }
-        />
-      ))} */}
       <Footer />
     </div>
   );

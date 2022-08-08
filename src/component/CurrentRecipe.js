@@ -17,7 +17,6 @@ export default function CurrentRecipe({ strThumb,
 }) {
   const [state, setState] = useState([]);
   const [localState, setLocalState] = useState(INITIAL_STATE);
-  const [measure, setMeasureUnits] = useState([]);
   const [isDisabled, setIsDisables] = useState(true);
   const history2 = useHistory();
 
@@ -84,18 +83,6 @@ export default function CurrentRecipe({ strThumb,
     setIsDisables(!state.every((value) => value.done));
   }, [state]);
 
-  //   [{
-  //     id: id-da-receita,
-  //     type: comida-ou-bebida,
-  //     nationality: nacionalidade-da-receita-ou-texto-vazio,
-  //     category: categoria-da-receita-ou-texto-vazio,
-  //     alcoholicOrNot: alcoholic-ou-non-alcoholic-ou-texto-vazio,
-  //     name: nome-da-receita,
-  //     image: imagem-da-receita,
-  //     doneDate: quando-a-receita-foi-concluida,
-  //     tags: array-de-tags-da-receita-ou-array-vazio
-  // }]
-
   const handleClick = () => {
     const result = localStorage.getItem('doneRecipes');
     const newObj = {
@@ -130,7 +117,6 @@ export default function CurrentRecipe({ strThumb,
       setState(result.cocktails[id]);
     } else {
       setState(ingredients);
-      setMeasureUnits(measureUnits);
     }
   }, []);
 
@@ -139,60 +125,93 @@ export default function CurrentRecipe({ strThumb,
       && (
         <div>
           <img
+            className="w-full h-48"
             data-testid="recipe-photo"
             src={ strThumb }
             alt={ strTitle }
             width="125px"
           />
-          <span data-testid="recipe-title">{strTitle}</span>
-          <span data-testid="recipe-category">{strCategory}</span>
-          <ShareButton testId="share-btn" />
-          <FavoriteButton
-            testIdFav="favorite-btn"
-            id={ id }
-            alt={ strTitle }
-            type={ recipeType }
-            nationality={ strArea }
-            category={ strCategory }
-            alcoholicOrNot={ strAlcoholic }
-            name={ strTitle }
-            image={ strThumb }
-          />
-          <span>Igredients</span>
-          {state.length && state.map((ingredient, index) => (
-            <label
-              key={ ingredient.name }
-              className={ ingredient.done ? 'line' : '' }
-              htmlFor={ ingredient.name }
-              data-testid={ `${index}-ingredient-step` }
+          <div className="bg-white m-1">
+            <div className="flex justify-between items-baseline">
+              <span
+                className="text-center text-6xl"
+                data-testid="recipe-title"
+              >
+                {strTitle}
+              </span>
+              <div className="flex items-baseline justify-around w-1/5">
+                <ShareButton testId="share-btn" />
+                <FavoriteButton
+                  testIdFav="favorite-btn"
+                  id={ id }
+                  alt={ strTitle }
+                  type={ recipeType }
+                  nationality={ strArea }
+                  category={ strCategory }
+                  alcoholicOrNot={ strAlcoholic }
+                  name={ strTitle }
+                  image={ strThumb }
+                />
+              </div>
+            </div>
+            <span
+              className="text-gray-400"
+              data-testid="recipe-category"
             >
-              {ingredient.name}
-              <input
-                type="checkbox"
-                checked={ ingredient.done }
-                id={ ingredient.name }
-                onChange={ () => handleChange(ingredient) }
-              />
-            </label>
-          ))}
-          {measure.map((unit, index) => (
-            <p
-              key={ unit.key }
-              data-testid={ `${index}-ingredient-name-and-measure` }
+              {strCategory}
+            </span>
+            <div className="bg-gray-300">
+              Igredients:
+              <div className="flex">
+                <div className="flex flex-col">
+                  {state.length && state.map((ingredient, index) => (
+                    <label
+                      key={ ingredient.name }
+                      className={ ingredient.done ? 'line-through' : '' }
+                      htmlFor={ ingredient.name }
+                      data-testid={ `${index}-ingredient-step` }
+                    >
+                      {ingredient.name}
+                      {' '}
+                      <input
+                        type="checkbox"
+                        checked={ ingredient.done }
+                        id={ ingredient.name }
+                        onChange={ () => handleChange(ingredient) }
+                      />
+                    </label>
+                  ))}
+                </div>
+                <div className="flex flex-col">
+                  {measureUnits.length > 0 && measureUnits
+                    .filter((value) => value.name !== ' ').map((unit, index) => (
+                      <p
+                        key={ unit.key }
+                        data-testid={ `${index}-ingredient-name-and-measure` }
+                      >
+                        {`-${unit.name}`}
+                      </p>
+                    ))}
+                </div>
+              </div>
+            </div>
+            <div className="bg-gray-300 my-3">
+              Instructions
+              <p data-testid="instructions">
+                { `Instructions: ${strInstructions}` }
+              </p>
+            </div>
+            <button
+              type="button"
+              className="w-full bg-green-500 hover:bg-green-700
+              text-white font-bold py-2 px-4 rounded"
+              disabled={ isDisabled }
+              data-testid="finish-recipe-btn"
+              onClick={ handleClick }
             >
-              {unit.name}
-            </p>
-          ))}
-          Instructions
-          <p data-testid="instructions">{strInstructions}</p>
-          <button
-            type="button"
-            disabled={ isDisabled }
-            data-testid="finish-recipe-btn"
-            onClick={ handleClick }
-          >
-            Finish recipe
-          </button>
+              Finish recipe
+            </button>
+          </div>
         </div>
       )
   );
