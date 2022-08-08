@@ -1,4 +1,4 @@
-# Este é meu projeto Trivia, desenvolvido na Trybe
+# Este é meu projeto Recipes App, desenvolvido na Trybe
 
 ## Alguns comentários
 
